@@ -1,37 +1,32 @@
-A3 Skeleton - Discussion
+TURTLEBOI FOLLOWING - Discussion
 =========================
 
-The skeleton code can be used for either project, consider this document when making changes to the code for your project.
+This is the code I have completed so far. So far the turtlebot is moving and is functional.
 
 ### Compiling
 
 Before you get started, make sure you do the following:
 
 * Check out the latest code from the repository
-* Link the `a3_skeleton` folder to your catkin workspace, (ie if your path is <YOURGIT>/tutorial/skeleton/a3_skeleton then execute:
+* Link the `turtleboi` folder to your catkin workspace, (ie if your path is <YOURGIT>/tutorial/skeleton/a3_skeleton then execute:
 ```bash
 cd ~/catkin_ws/src
-ln -s <YOURGIT>/skeleton/a3_skeleton
+ln -s <YOURGIT>/<Reporsitoy name>/turtleboi
 ```
 
-* Compile packages using `catkin_make` and compile tests using `catkin_make tests`
+* Compile packages using `catkin_make` 
 ```bash
 cd ~/catkin_ws
 catkin_make
 ```
 
-* Compile tests using `catkin_make tests`  ... there is an *s* at the end of tests!
-```bash
-cd ~/catkin_ws
-catkin_make tests
-```
 
 ### Execution
 
 ```bash
 roscore
-roslaunch gazebo_tf ugv_a3.launch
-rosrun a3_skeleton a3_skeleton_sample
+roslaunch turtlebot3_fake turtlebot3_fake.launch
+rosrun turtleboi turtleboi_method
 ```
 
 The code:
@@ -39,33 +34,29 @@ The code:
 * Subscribes to some topics / Advertises some topics / Advertises a service
 * Has a seperate thread of execution where it sends steering 1.0 rad, throttle 0.1 every 0.2s 
 
-### **Moving forward you need to examine the project specifications and make changes**
+### **Code Structure**
 
-Make changes to the skeleton, DO NOT LEAVE obsolete or unused function  calls.
+This code structure has 3 sections. Similar to PFMS we have has cpp file called method that was called sample in PFMS. Remeber the main method creates a new thread running within method.
 
-You will need to determine which topics to subsribe to (callbacks to enable) as well as which topics to advertise (data to publish).  There are some in-code comments that indicate how to proceed with this. 
+The method file handles all ros communication such as publishing and subscribing. This method also handle all communciation with the two libaries to do with movenment and machine vision. 
 
-Examine example of obtaining parameters on the command line (a bool and a double), you need to remove or adapt this to suit your project. 
+The method file subscribes topics of odom (odometry data), Camera RGB, Camera Depth Data, Lid Sensor.
 
-Add more threads if required, it is best to decouple sensing (decision making) and control.
+This method file will publish to cmd_vel which sends a velocity to the turtle bot in the formatt of geometry_msg::Twist which is object. For example and object of type twist inclues object.linear.x,y,z and object.angular.x,y,z. 
 
-Examine the service call and make changes to what it accomplishes
+This will be the major challenge of movenemnt velocity in tranforming the data of two points into these values.
 
-Use your knowledge of classes / inheritance / access specifiers / threading / data protection, all aspects covered thus far to modify sample code. 
+Additionly I might added another publisher to added goal markers to the rviz
 
-### **Unit testing**
 
-We do not provide data or specific code for the unit testing in the final assignment, you will need  to develop and test your own code using the knowledge gained from the subject. Unit tests are generally performed on libraries.  **You should NOT have code with callbacks being tested**. You can opt to have different constructors that allow various forms of integration. It is the nature of unit tests, that the answer is known for the test, checking the function for a variety of situations with known answers.  
+The method file communciates with the sensorprocessing file by providing it all of the sensor data in a specisted object called RobotData. The method file combines all of the subscribed data using mutex and call backs into this structure and sends it to the snesor processing libary.
 
-The unit test in this skeleton uses a rosbag that has been previously recorded, for which an answer of closest point is known (observed from simulation) and this is used.  You will need to make changes to the code for your assignment, recording a suitable bag that examines your node, where you INDEPENDENTLY assess the solution and then check your code performance.  REVIEW weeks 10/11 about the tools in rviz that let you obtain data that can be used in the unity test. The content in week 10/11 also shows how to record a rosbag that can be used in the unit test, and this was an activity in class in those weeks.
+for example an object called data of type robotdata will be able to do data.lidata, data.RGB, or data.imageDepth
 
-In the unit test the rosbag is opened, and one reading each for position of robot (odometry) and laser scan is used. A function of a class is developed and tested for. NOTE that we here need to specify what topic name and data type we are looking for in the bag. 
+The goal is to have a major calcuation function that will return a point in x,y for the movenment libary.
 
-The package defines some unit tests and compiles a test executable called `a3_skeleton_test`. You can find the unit tests itself as in [utest.cpp](./starter/services_masterclass/test/utest.cpp) You can run tests 
+The method file will send this point from sensory data processing and the current position from odom to the movenment library. This libraying will have function such as calculate the trajectory and distance to goal. The same sort stuff we did in PFMS but not as detailed and different with the movenment type
 
-```bash
-rosrun a3_skeleton a3_skeleton_test
-```
 
 ### Documentation
 
