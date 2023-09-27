@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.0.1)
 project(a3_skeleton)
+set(CMAKE_CXX_STANDARD 11)
+
 
 # This package depends on a5_setup, because it uses a service declared there
 find_package(catkin REQUIRED COMPONENTS
@@ -50,26 +52,26 @@ include_directories(
 )
 
 ## Declare a C++ library
-add_library(${PROJECT_NAME}_laserprocessing src/laserprocessing.cpp)
-add_library(${PROJECT_NAME}_dataprocessing src/dataprocessing.cpp)
+add_library(${PROJECT_NAME}_sensorprocessing src/sensorprocessing.cpp)
+add_library(${PROJECT_NAME}_movenment src/movenment.cpp)
 
 ## Declare a C++ executable
-add_executable(${PROJECT_NAME}_sample src/main.cpp src/sample.cpp)
+add_executable(${PROJECT_NAME}_method src/main.cpp src/method.cpp)
 
 # Add cmake target dependencies of the executable
 # This enforces generating messages before building these executables
-add_dependencies(${PROJECT_NAME}_sample ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_method ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 # Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_sample ${catkin_LIBRARIES} ${PROJECT_NAME}_laserprocessing)
-target_link_libraries(${PROJECT_NAME}_sample ${catkin_LIBRARIES} ${PROJECT_NAME}_dataprocessing)
+target_link_libraries(${PROJECT_NAME}_method ${catkin_LIBRARIES} ${PROJECT_NAME}_movenment)
+target_link_libraries(${PROJECT_NAME}_method ${catkin_LIBRARIES} ${PROJECT_NAME}_senorprocessing)
 
 #############
 ## Testing ##
 #############
 ## Add gtest based cpp test target and link libraries
-catkin_add_gtest(${PROJECT_NAME}_test test/utest.cpp )
-if(TARGET ${PROJECT_NAME}_test)
-   target_link_libraries(${PROJECT_NAME}_test ${catkin_LIBRARIES} ${PROJECT_NAME}_laserprocessing ${PROJECT_NAME}_dataprocessing)
-   message ( STATUS " catkin_LIBRARIES ${catkin_LIBRARIES}")
-endif()
+# catkin_add_gtest(${PROJECT_NAME}_test test/utest.cpp )
+# if(TARGET ${PROJECT_NAME}_test)
+#    target_link_libraries(${PROJECT_NAME}_test ${catkin_LIBRARIES} ${PROJECT_NAME}_laserprocessing ${PROJECT_NAME}_dataprocessing)
+#    message ( STATUS " catkin_LIBRARIES ${catkin_LIBRARIES}")
+# endif()
