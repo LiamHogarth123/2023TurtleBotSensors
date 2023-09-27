@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g  -shared -Wl,-soname,libturtleboi_movenment.so -o devel/lib/libturtleboi_movenment.so CMakeFiles/turtleboi_movenment.dir/src/movenment.cpp.o 

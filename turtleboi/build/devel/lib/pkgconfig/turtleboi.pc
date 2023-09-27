@@ -1,0 +1,8 @@
+prefix=/home/liam/git/2023TurtleBotSensors/turtleboi/build/devel
+
+Name: turtleboi
+Description: Description of turtleboi
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
