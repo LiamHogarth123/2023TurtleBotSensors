@@ -11,6 +11,16 @@
 */
 
 
-movenment::movenment(){
+Movenment::Movenment(geometry_msgs::Point temp_goal){
+    Goal = temp_goal;
+}
+
+void Movenment::newGoal(geometry_msgs::Point temp_goal){
+    Goal = temp_goal;
+}
+
+geometry_msgs::Twist Movenment::Cacluation(){
+    //do math to caclule the required linear and angular velocity to reach point
+    
 
 }

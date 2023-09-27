@@ -151,7 +151,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=a3_skeleton
+CMAKE_PROJECT_NAME:STATIC=TurtleBot
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -256,6 +256,18 @@ SETUPTOOLS_DEB_LAYOUT:BOOL=ON
 //Name of the computer/site where compile is being run
 SITE:STRING=ubuntu
 
+//Value Computed by CMake
+TurtleBot_BINARY_DIR:STATIC=/home/liam/git/2023TurtleBotSensors/Code/build
+
+//Value Computed by CMake
+TurtleBot_SOURCE_DIR:STATIC=/home/liam/git/2023TurtleBotSensors/Code
+
+//Dependencies for target
+TurtleBot_movenment_LIB_DEPENDS:STATIC=
+
+//Dependencies for target
+TurtleBot_sensorprocessing_LIB_DEPENDS:STATIC=
+
 //LSB Distrib tag
 UBUNTU:BOOL=TRUE
 
@@ -273,18 +285,6 @@ _gtest_INCLUDES:FILEPATH=/usr/include/gtest/gtest.h
 
 //Path to a file.
 _gtest_SOURCES:FILEPATH=/usr/src/gtest/src/gtest.cc
-
-//Value Computed by CMake
-a3_skeleton_BINARY_DIR:STATIC=/home/liam/git/2023TurtleBotSensors/Code/build
-
-//Value Computed by CMake
-a3_skeleton_SOURCE_DIR:STATIC=/home/liam/git/2023TurtleBotSensors/Code
-
-//Dependencies for target
-a3_skeleton_movenment_LIB_DEPENDS:STATIC=
-
-//Dependencies for target
-a3_skeleton_sensorprocessing_LIB_DEPENDS:STATIC=
 
 //The directory containing a CMake configuration file for actionlib_msgs.
 actionlib_msgs_DIR:PATH=/opt/ros/melodic/share/actionlib_msgs/cmake

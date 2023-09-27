@@ -3,7 +3,10 @@
 
 using namespace std;
 
-sensorprocessing::sensorprocessing(){   
-   
+sensorprocessing::sensorprocessing(RobotData New_Data){   
+    Image_data = New_Data;
 }
+
+
+
 

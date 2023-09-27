@@ -129,18 +129,18 @@ file(INSTALL DESTINATION "/usr/local" TYPE FILE FILES "/home/liam/git/2023Turtle
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/liam/git/2023TurtleBotSensors/Code/build/catkin_generated/installspace/a3_skeleton.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/liam/git/2023TurtleBotSensors/Code/build/catkin_generated/installspace/TurtleBot.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/a3_skeleton/cmake" TYPE FILE FILES
-    "/home/liam/git/2023TurtleBotSensors/Code/build/catkin_generated/installspace/a3_skeletonConfig.cmake"
-    "/home/liam/git/2023TurtleBotSensors/Code/build/catkin_generated/installspace/a3_skeletonConfig-version.cmake"
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/TurtleBot/cmake" TYPE FILE FILES
+    "/home/liam/git/2023TurtleBotSensors/Code/build/catkin_generated/installspace/TurtleBotConfig.cmake"
+    "/home/liam/git/2023TurtleBotSensors/Code/build/catkin_generated/installspace/TurtleBotConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/a3_skeleton" TYPE FILE FILES "/home/liam/git/2023TurtleBotSensors/Code/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/TurtleBot" TYPE FILE FILES "/home/liam/git/2023TurtleBotSensors/Code/package.xml")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

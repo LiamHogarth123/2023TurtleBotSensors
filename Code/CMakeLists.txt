@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.1)
-project(a3_skeleton)
+project(TurtleBot)
 set(CMAKE_CXX_STANDARD 11)
 
 
@@ -64,8 +64,7 @@ add_dependencies(${PROJECT_NAME}_method ${${PROJECT_NAME}_EXPORTED_TARGETS} ${ca
 
 # Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_method ${catkin_LIBRARIES} ${PROJECT_NAME}_movenment)
-target_link_libraries(${PROJECT_NAME}_method ${catkin_LIBRARIES} ${PROJECT_NAME}_senorprocessing)
-
+target_link_libraries(${PROJECT_NAME}_method ${catkin_LIBRARIES} ${PROJECT_NAME}_sensorprocessing)
 #############
 ## Testing ##
 #############

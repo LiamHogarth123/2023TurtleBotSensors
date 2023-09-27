@@ -1,23 +1,23 @@
 [
 {
   "directory": "/home/liam/git/2023TurtleBotSensors/Code/build",
-  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"a3_skeleton\\\" -I/home/liam/git/2023TurtleBotSensors/Code/include -I/home/liam/git/2023TurtleBotSensors/Code/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g   -std=gnu++11 -o CMakeFiles/a3_skeleton_method.dir/src/main.cpp.o -c /home/liam/git/2023TurtleBotSensors/Code/src/main.cpp",
-  "file": "/home/liam/git/2023TurtleBotSensors/Code/src/main.cpp"
-},
-{
-  "directory": "/home/liam/git/2023TurtleBotSensors/Code/build",
-  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"a3_skeleton\\\" -I/home/liam/git/2023TurtleBotSensors/Code/include -I/home/liam/git/2023TurtleBotSensors/Code/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g   -std=gnu++11 -o CMakeFiles/a3_skeleton_method.dir/src/method.cpp.o -c /home/liam/git/2023TurtleBotSensors/Code/src/method.cpp",
-  "file": "/home/liam/git/2023TurtleBotSensors/Code/src/method.cpp"
-},
-{
-  "directory": "/home/liam/git/2023TurtleBotSensors/Code/build",
-  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"a3_skeleton\\\" -Da3_skeleton_sensorprocessing_EXPORTS -I/home/liam/git/2023TurtleBotSensors/Code/include -I/home/liam/git/2023TurtleBotSensors/Code/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g -fPIC   -std=gnu++11 -o CMakeFiles/a3_skeleton_sensorprocessing.dir/src/sensorprocessing.cpp.o -c /home/liam/git/2023TurtleBotSensors/Code/src/sensorprocessing.cpp",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"TurtleBot\\\" -DTurtleBot_sensorprocessing_EXPORTS -I/home/liam/git/2023TurtleBotSensors/Code/include -I/home/liam/git/2023TurtleBotSensors/Code/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g -fPIC   -std=gnu++11 -o CMakeFiles/TurtleBot_sensorprocessing.dir/src/sensorprocessing.cpp.o -c /home/liam/git/2023TurtleBotSensors/Code/src/sensorprocessing.cpp",
   "file": "/home/liam/git/2023TurtleBotSensors/Code/src/sensorprocessing.cpp"
 },
 {
   "directory": "/home/liam/git/2023TurtleBotSensors/Code/build",
-  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"a3_skeleton\\\" -Da3_skeleton_movenment_EXPORTS -I/home/liam/git/2023TurtleBotSensors/Code/include -I/home/liam/git/2023TurtleBotSensors/Code/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g -fPIC   -std=gnu++11 -o CMakeFiles/a3_skeleton_movenment.dir/src/movenment.cpp.o -c /home/liam/git/2023TurtleBotSensors/Code/src/movenment.cpp",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"TurtleBot\\\" -DTurtleBot_movenment_EXPORTS -I/home/liam/git/2023TurtleBotSensors/Code/include -I/home/liam/git/2023TurtleBotSensors/Code/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g -fPIC   -std=gnu++11 -o CMakeFiles/TurtleBot_movenment.dir/src/movenment.cpp.o -c /home/liam/git/2023TurtleBotSensors/Code/src/movenment.cpp",
   "file": "/home/liam/git/2023TurtleBotSensors/Code/src/movenment.cpp"
+},
+{
+  "directory": "/home/liam/git/2023TurtleBotSensors/Code/build",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"TurtleBot\\\" -I/home/liam/git/2023TurtleBotSensors/Code/include -I/home/liam/git/2023TurtleBotSensors/Code/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g   -std=gnu++11 -o CMakeFiles/TurtleBot_method.dir/src/main.cpp.o -c /home/liam/git/2023TurtleBotSensors/Code/src/main.cpp",
+  "file": "/home/liam/git/2023TurtleBotSensors/Code/src/main.cpp"
+},
+{
+  "directory": "/home/liam/git/2023TurtleBotSensors/Code/build",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"TurtleBot\\\" -I/home/liam/git/2023TurtleBotSensors/Code/include -I/home/liam/git/2023TurtleBotSensors/Code/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g   -std=gnu++11 -o CMakeFiles/TurtleBot_method.dir/src/method.cpp.o -c /home/liam/git/2023TurtleBotSensors/Code/src/method.cpp",
+  "file": "/home/liam/git/2023TurtleBotSensors/Code/src/method.cpp"
 },
 {
   "directory": "/home/liam/git/2023TurtleBotSensors/Code/build/gtest/googlemock",

@@ -5,6 +5,7 @@
 #include <chrono>
 #include <time.h>
 #include <nav_msgs/Odometry.h>
+#include <image_data_struct.h>
 // #include <kobuki_msgs/DigitalOutput.h>
 #include "ros/ros.h"
 
@@ -39,19 +40,36 @@ Method::Method(ros::NodeHandle nh) :
 
 
 void Method::odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsg){
-
+  std::unique_lock<std::mutex> lck3 (odom_locker);
+  Current_Odom = *odomMsg;
 }
 
 void  Method::RGBCallback(const sensor_msgs::Image::ConstPtr& Msg){
+  std::unique_lock<std::mutex> lck3 (RGB_locker);
+  updated_RGB = *Msg;
 
 }
 
-void Method::LidaCallback(const sensor_msgs::LaserScan::ConstPtr& odomMsg){
-
+void Method::LidaCallback(const sensor_msgs::LaserScan::ConstPtr& Msg){
+  std::unique_lock<std::mutex> lck3 (Lida_locker);
+  updated_Lida = *Msg;
 }
 
 void Method::ImageDepthCallback(const sensor_msgs::Image::ConstPtr& Msg){
-  
+  std::unique_lock<std::mutex> lck3 (ImageDepth_locker);
+  updated_imageDepth = *Msg;
+}
+
+
+void Method::Update_Robot_Image_data(){
+  std::unique_lock<std::mutex> lck1 (RGB_locker);
+  std::unique_lock<std::mutex> lck2 (Lida_locker);
+  std::unique_lock<std::mutex> lck3 (ImageDepth_locker);
+
+  Image_data.depthImage = updated_imageDepth;
+  Image_data.laserScan = updated_Lida;
+  Image_data.rgbImage = updated_RGB;
+
 }
 
 
@@ -72,6 +90,9 @@ void Method::seperateThread() {
   //Send to caclulation
   //Cacluation returns data
   //send intructions to turtlebot
+  //wait and check if goal has been meet or if emergency stop??
+  //once hit goal stop?
+  //repeat
 
 
 }

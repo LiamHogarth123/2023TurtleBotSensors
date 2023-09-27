@@ -28,28 +28,28 @@ The CXX compiler identification is GNU, found in "/home/liam/git/2023TurtleBotSe
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_08f54/fast"
-/usr/bin/make -f CMakeFiles/cmTC_08f54.dir/build.make CMakeFiles/cmTC_08f54.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_a877e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_a877e.dir/build.make CMakeFiles/cmTC_a877e.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_08f54.dir/testCCompiler.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_08f54.dir/testCCompiler.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_08f54
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_08f54.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_08f54.dir/testCCompiler.c.o  -o cmTC_08f54 
+Building C object CMakeFiles/cmTC_a877e.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_a877e.dir/testCCompiler.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_a877e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a877e.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_a877e.dir/testCCompiler.c.o  -o cmTC_a877e 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_849e4/fast"
-/usr/bin/make -f CMakeFiles/cmTC_849e4.dir/build.make CMakeFiles/cmTC_849e4.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_cbe0a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cbe0a.dir/build.make CMakeFiles/cmTC_cbe0a.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_849e4.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_849e4.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c
-Linking C executable cmTC_849e4
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_849e4.dir/link.txt --verbose=1
-/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_849e4.dir/CMakeCCompilerABI.c.o  -o cmTC_849e4 
+Building C object CMakeFiles/cmTC_cbe0a.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_cbe0a.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_cbe0a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cbe0a.dir/link.txt --verbose=1
+/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_cbe0a.dir/CMakeCCompilerABI.c.o  -o cmTC_cbe0a 
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper
@@ -61,9 +61,9 @@ Thread model: posix
 gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_849e4' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccqs5at7.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_849e4 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_849e4.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_849e4' '-mtune=generic' '-march=x86-64'
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_cbe0a' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccC4dXrH.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_cbe0a /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_cbe0a.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_cbe0a' '-mtune=generic' '-march=x86-64'
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
@@ -71,14 +71,14 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_849e4/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_849e4.dir/build.make CMakeFiles/cmTC_849e4.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_cbe0a/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_cbe0a.dir/build.make CMakeFiles/cmTC_cbe0a.dir/build]
   ignore line: [make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_849e4.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc    -o CMakeFiles/cmTC_849e4.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTC_849e4]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_849e4.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_849e4.dir/CMakeCCompilerABI.c.o  -o cmTC_849e4 ]
+  ignore line: [Building C object CMakeFiles/cmTC_cbe0a.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc    -o CMakeFiles/cmTC_cbe0a.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_cbe0a]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cbe0a.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_cbe0a.dir/CMakeCCompilerABI.c.o  -o cmTC_cbe0a ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper]
@@ -90,13 +90,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_849e4' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccqs5at7.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_849e4 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_849e4.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_cbe0a' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccC4dXrH.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_cbe0a /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_cbe0a.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccqs5at7.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccC4dXrH.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -115,7 +115,7 @@ Parsed C implicit link information from above output:
     arg [-znow] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_849e4] ==> ignore
+    arg [cmTC_cbe0a] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o] ==> ignore
@@ -127,7 +127,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/7/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/7/../../..]
-    arg [CMakeFiles/cmTC_849e4.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_cbe0a.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--push-state] ==> ignore
     arg [--as-needed] ==> ignore
@@ -159,14 +159,14 @@ Parsed C implicit link information from above output:
 Detecting C [-std=c11] compiler features compiled with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_3ad56/fast"
-/usr/bin/make -f CMakeFiles/cmTC_3ad56.dir/build.make CMakeFiles/cmTC_3ad56.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_9c3cc/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9c3cc.dir/build.make CMakeFiles/cmTC_9c3cc.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_3ad56.dir/feature_tests.c.o
-/usr/bin/cc   -std=c11 -o CMakeFiles/cmTC_3ad56.dir/feature_tests.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_3ad56
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ad56.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_3ad56.dir/feature_tests.c.o  -o cmTC_3ad56 
+Building C object CMakeFiles/cmTC_9c3cc.dir/feature_tests.c.o
+/usr/bin/cc   -std=c11 -o CMakeFiles/cmTC_9c3cc.dir/feature_tests.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_9c3cc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9c3cc.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_9c3cc.dir/feature_tests.c.o  -o cmTC_9c3cc 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
@@ -179,14 +179,14 @@ make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMake
 Detecting C [-std=c99] compiler features compiled with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_d14b1/fast"
-/usr/bin/make -f CMakeFiles/cmTC_d14b1.dir/build.make CMakeFiles/cmTC_d14b1.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_10870/fast"
+/usr/bin/make -f CMakeFiles/cmTC_10870.dir/build.make CMakeFiles/cmTC_10870.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_d14b1.dir/feature_tests.c.o
-/usr/bin/cc   -std=c99 -o CMakeFiles/cmTC_d14b1.dir/feature_tests.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_d14b1
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d14b1.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_d14b1.dir/feature_tests.c.o  -o cmTC_d14b1 
+Building C object CMakeFiles/cmTC_10870.dir/feature_tests.c.o
+/usr/bin/cc   -std=c99 -o CMakeFiles/cmTC_10870.dir/feature_tests.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_10870
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_10870.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_10870.dir/feature_tests.c.o  -o cmTC_10870 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
@@ -199,14 +199,14 @@ make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMake
 Detecting C [-std=c90] compiler features compiled with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_8760a/fast"
-/usr/bin/make -f CMakeFiles/cmTC_8760a.dir/build.make CMakeFiles/cmTC_8760a.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c4a87/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c4a87.dir/build.make CMakeFiles/cmTC_c4a87.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_8760a.dir/feature_tests.c.o
-/usr/bin/cc   -std=c90 -o CMakeFiles/cmTC_8760a.dir/feature_tests.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_8760a
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8760a.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_8760a.dir/feature_tests.c.o  -o cmTC_8760a 
+Building C object CMakeFiles/cmTC_c4a87.dir/feature_tests.c.o
+/usr/bin/cc   -std=c90 -o CMakeFiles/cmTC_c4a87.dir/feature_tests.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_c4a87
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c4a87.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_c4a87.dir/feature_tests.c.o  -o cmTC_c4a87 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
@@ -217,28 +217,28 @@ make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMake
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_27088/fast"
-/usr/bin/make -f CMakeFiles/cmTC_27088.dir/build.make CMakeFiles/cmTC_27088.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_14c25/fast"
+/usr/bin/make -f CMakeFiles/cmTC_14c25.dir/build.make CMakeFiles/cmTC_14c25.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_27088.dir/testCXXCompiler.cxx.o
-/usr/bin/c++     -o CMakeFiles/cmTC_27088.dir/testCXXCompiler.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_27088
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_27088.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_27088.dir/testCXXCompiler.cxx.o  -o cmTC_27088 
+Building CXX object CMakeFiles/cmTC_14c25.dir/testCXXCompiler.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTC_14c25.dir/testCXXCompiler.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_14c25
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_14c25.dir/link.txt --verbose=1
+/usr/bin/c++       -rdynamic CMakeFiles/cmTC_14c25.dir/testCXXCompiler.cxx.o  -o cmTC_14c25 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_58022/fast"
-/usr/bin/make -f CMakeFiles/cmTC_58022.dir/build.make CMakeFiles/cmTC_58022.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_433b2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_433b2.dir/build.make CMakeFiles/cmTC_433b2.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_58022.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++     -o CMakeFiles/cmTC_58022.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_58022
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_58022.dir/link.txt --verbose=1
-/usr/bin/c++      -v -rdynamic CMakeFiles/cmTC_58022.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_58022 
+Building CXX object CMakeFiles/cmTC_433b2.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++     -o CMakeFiles/cmTC_433b2.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_433b2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_433b2.dir/link.txt --verbose=1
+/usr/bin/c++      -v -rdynamic CMakeFiles/cmTC_433b2.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_433b2 
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper
@@ -250,9 +250,9 @@ Thread model: posix
 gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_58022' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/cc6r4UyJ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_58022 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_58022.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_58022' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_433b2' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccQYaZmQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_433b2 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_433b2.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_433b2' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
@@ -260,14 +260,14 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_58022/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_58022.dir/build.make CMakeFiles/cmTC_58022.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_433b2/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_433b2.dir/build.make CMakeFiles/cmTC_433b2.dir/build]
   ignore line: [make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_58022.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTC_58022.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_58022]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_58022.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++      -v -rdynamic CMakeFiles/cmTC_58022.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_58022 ]
+  ignore line: [Building CXX object CMakeFiles/cmTC_433b2.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTC_433b2.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_433b2]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_433b2.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++      -v -rdynamic CMakeFiles/cmTC_433b2.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_433b2 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper]
@@ -279,13 +279,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_58022' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/cc6r4UyJ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_58022 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_58022.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_433b2' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccQYaZmQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_433b2 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_433b2.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/cc6r4UyJ.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccQYaZmQ.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -304,7 +304,7 @@ Parsed CXX implicit link information from above output:
     arg [-znow] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_58022] ==> ignore
+    arg [cmTC_433b2] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o] ==> ignore
@@ -316,7 +316,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/7/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/7/../../..]
-    arg [CMakeFiles/cmTC_58022.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_433b2.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -344,14 +344,14 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++1z] compiler features compiled with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_ec8a1/fast"
-/usr/bin/make -f CMakeFiles/cmTC_ec8a1.dir/build.make CMakeFiles/cmTC_ec8a1.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_416a6/fast"
+/usr/bin/make -f CMakeFiles/cmTC_416a6.dir/build.make CMakeFiles/cmTC_416a6.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_ec8a1.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++1z -o CMakeFiles/cmTC_ec8a1.dir/feature_tests.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_ec8a1
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ec8a1.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_ec8a1.dir/feature_tests.cxx.o  -o cmTC_ec8a1 
+Building CXX object CMakeFiles/cmTC_416a6.dir/feature_tests.cxx.o
+/usr/bin/c++    -std=c++1z -o CMakeFiles/cmTC_416a6.dir/feature_tests.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_416a6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_416a6.dir/link.txt --verbose=1
+/usr/bin/c++       -rdynamic CMakeFiles/cmTC_416a6.dir/feature_tests.cxx.o  -o cmTC_416a6 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
@@ -417,14 +417,14 @@ make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMake
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_be749/fast"
-/usr/bin/make -f CMakeFiles/cmTC_be749.dir/build.make CMakeFiles/cmTC_be749.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_01cb2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_01cb2.dir/build.make CMakeFiles/cmTC_01cb2.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_be749.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++14 -o CMakeFiles/cmTC_be749.dir/feature_tests.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_be749
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_be749.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_be749.dir/feature_tests.cxx.o  -o cmTC_be749 
+Building CXX object CMakeFiles/cmTC_01cb2.dir/feature_tests.cxx.o
+/usr/bin/c++    -std=c++14 -o CMakeFiles/cmTC_01cb2.dir/feature_tests.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_01cb2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_01cb2.dir/link.txt --verbose=1
+/usr/bin/c++       -rdynamic CMakeFiles/cmTC_01cb2.dir/feature_tests.cxx.o  -o cmTC_01cb2 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
@@ -490,14 +490,14 @@ make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMake
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_32fed/fast"
-/usr/bin/make -f CMakeFiles/cmTC_32fed.dir/build.make CMakeFiles/cmTC_32fed.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_99e8b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_99e8b.dir/build.make CMakeFiles/cmTC_99e8b.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_32fed.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++11 -o CMakeFiles/cmTC_32fed.dir/feature_tests.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_32fed
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_32fed.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_32fed.dir/feature_tests.cxx.o  -o cmTC_32fed 
+Building CXX object CMakeFiles/cmTC_99e8b.dir/feature_tests.cxx.o
+/usr/bin/c++    -std=c++11 -o CMakeFiles/cmTC_99e8b.dir/feature_tests.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_99e8b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_99e8b.dir/link.txt --verbose=1
+/usr/bin/c++       -rdynamic CMakeFiles/cmTC_99e8b.dir/feature_tests.cxx.o  -o cmTC_99e8b 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
@@ -563,14 +563,14 @@ make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMake
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_0acf5/fast"
-/usr/bin/make -f CMakeFiles/cmTC_0acf5.dir/build.make CMakeFiles/cmTC_0acf5.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_94ac6/fast"
+/usr/bin/make -f CMakeFiles/cmTC_94ac6.dir/build.make CMakeFiles/cmTC_94ac6.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_0acf5.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++98 -o CMakeFiles/cmTC_0acf5.dir/feature_tests.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_0acf5
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0acf5.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_0acf5.dir/feature_tests.cxx.o  -o cmTC_0acf5 
+Building CXX object CMakeFiles/cmTC_94ac6.dir/feature_tests.cxx.o
+/usr/bin/c++    -std=c++98 -o CMakeFiles/cmTC_94ac6.dir/feature_tests.cxx.o -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_94ac6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_94ac6.dir/link.txt --verbose=1
+/usr/bin/c++       -rdynamic CMakeFiles/cmTC_94ac6.dir/feature_tests.cxx.o  -o cmTC_94ac6 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
@@ -634,28 +634,28 @@ make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMake
 Determining if the include file pthread.h exists passed with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_6183d/fast"
-/usr/bin/make -f CMakeFiles/cmTC_6183d.dir/build.make CMakeFiles/cmTC_6183d.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_90588/fast"
+/usr/bin/make -f CMakeFiles/cmTC_90588.dir/build.make CMakeFiles/cmTC_90588.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_6183d.dir/CheckIncludeFile.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_6183d.dir/CheckIncludeFile.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
-Linking C executable cmTC_6183d
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6183d.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_6183d.dir/CheckIncludeFile.c.o  -o cmTC_6183d 
+Building C object CMakeFiles/cmTC_90588.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_90588.dir/CheckIncludeFile.c.o   -c /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_90588
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_90588.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_90588.dir/CheckIncludeFile.c.o  -o cmTC_90588 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 
 Determining if the function pthread_create exists in the pthread passed with the following output:
 Change Dir: /home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_8ffd5/fast"
-/usr/bin/make -f CMakeFiles/cmTC_8ffd5.dir/build.make CMakeFiles/cmTC_8ffd5.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_49e8e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_49e8e.dir/build.make CMakeFiles/cmTC_49e8e.dir/build
 make[1]: Entering directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_8ffd5.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_8ffd5.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_8ffd5
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8ffd5.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_8ffd5.dir/CheckFunctionExists.c.o  -o cmTC_8ffd5 -lpthread 
+Building C object CMakeFiles/cmTC_49e8e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_49e8e.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_49e8e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_49e8e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_49e8e.dir/CheckFunctionExists.c.o  -o cmTC_49e8e -lpthread 
 make[1]: Leaving directory '/home/liam/git/2023TurtleBotSensors/Code/build/CMakeFiles/CMakeTmp'
 
 

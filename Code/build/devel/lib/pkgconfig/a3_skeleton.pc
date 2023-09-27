@@ -1,8 +1,0 @@
-prefix=/home/liam/git/2023TurtleBotSensors/Code/build/devel
-
-Name: a3_skeleton
-Description: Description of a3_skeleton
-Version: 0.0.1
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
