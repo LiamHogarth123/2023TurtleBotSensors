@@ -46,10 +46,15 @@ void  Method::RGBCallback(const sensor_msgs::Image::ConstPtr& Msg){
 
 }
 
-
 void Method::LidaCallback(const sensor_msgs::LaserScan::ConstPtr& odomMsg){
 
 }
+
+void Method::ImageDepthCallback(const sensor_msgs::Image::ConstPtr& Msg){
+  
+}
+
+
 
 void Method::Send_cmd(geometry_msgs::Twist intructions){
     cmd_velocity.publish(intructions);
