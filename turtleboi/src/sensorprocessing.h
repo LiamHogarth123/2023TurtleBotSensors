@@ -3,6 +3,7 @@
 
 #include <sensor_msgs/LaserScan.h>
 #include <geometry_msgs/Pose.h>
+
 #include <math.h>
 #include "tf/transform_datatypes.h"
 #include <geometry_msgs/PoseArray.h>
@@ -19,9 +20,16 @@ public:
    */
   Sensorprocessing(RobotData New_data);
 
+  geometry_msgs::Point CalculateMidPoint();
 
+  void Newdata(RobotData temp_data);
+
+
+  private:
   RobotData Image_data;
 
 };
+
+
 
 #endif // DETECTCABINET_H

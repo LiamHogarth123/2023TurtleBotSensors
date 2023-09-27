@@ -39,7 +39,7 @@ public:
   void ImageDepthCallback(const sensor_msgs::Image::ConstPtr& Msg);
 
 
-  void Update_Robot_Image_data();
+  RobotData Update_Robot_Image_data();
 
 
   void Send_cmd(geometry_msgs::Twist intructions);
@@ -75,7 +75,8 @@ public:
   sensor_msgs::Image updated_imageDepth;
 
   RobotData Image_data;
-
+  geometry_msgs::Point goal;
+  geometry_msgs::Twist traj;
 
 };
 

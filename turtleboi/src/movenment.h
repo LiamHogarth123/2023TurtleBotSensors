@@ -20,7 +20,7 @@ class Movenment
     */
     Movenment(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose);
 
-    void newGoal(geometry_msgs::Point temp_goal);
+    void newGoal(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose );
 
     geometry_msgs::Twist Cacluation();
 

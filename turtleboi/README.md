@@ -38,6 +38,8 @@ The code:
 
 This code structure has 3 sections. Similar to PFMS we have has cpp file called method that was called sample in PFMS. Remeber the main method creates a new thread running within method.
 
+### **method file (main parent file)**
+
 The method file handles all ros communication such as publishing and subscribing. This method also handle all communciation with the two libaries to do with movenment and machine vision. 
 
 The method file subscribes topics of odom (odometry data), Camera RGB, Camera Depth Data, Lid Sensor.
@@ -48,14 +50,19 @@ This will be the major challenge of movenemnt velocity in tranforming the data o
 
 Additionly I might added another publisher to added goal markers to the rviz
 
-
+### **Sensor Procesing file**
 The method file communciates with the sensorprocessing file by providing it all of the sensor data in a specisted object called RobotData. The method file combines all of the subscribed data using mutex and call backs into this structure and sends it to the snesor processing libary.
 
 for example an object called data of type robotdata will be able to do data.lidata, data.RGB, or data.imageDepth
 
 The goal is to have a major calcuation function that will return a point in x,y for the movenment libary.
 
+since we have which I believe to be the same formatt as the ACKERMAN car as las time which should make it somewhat easy. 
+
+### **movenment file**
+
 The method file will send this point from sensory data processing and the current position from odom to the movenment library. This libraying will have function such as calculate the trajectory and distance to goal. The same sort stuff we did in PFMS but not as detailed and different with the movenment type
+
 
 
 ### Documentation

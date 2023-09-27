@@ -16,8 +16,9 @@ Movenment::Movenment(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Cur
     Current_Pose = temp_Current_Pose;
 }
 
-void Movenment::newGoal(geometry_msgs::Point temp_goal){
+void Movenment::newGoal(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose){
     Goal = temp_goal;
+    Current_Pose = temp_Current_Pose;
 }
 
 geometry_msgs::Twist Movenment::Cacluation(){
@@ -29,6 +30,6 @@ geometry_msgs::Twist Movenment::Cacluation(){
     double DirectDistance = sqrt(std::pow(Deta_x,2) + std::pow(Deta_y,2));
     double Angle = atan2(Deta_x,Deta_y); // check this as x and y could be flipped
 
-
+    return Directions;
     
 }
