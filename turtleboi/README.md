@@ -55,6 +55,13 @@ The method file communciates with the sensorprocessing file by providing it all 
 
 for example an object called data of type robotdata will be able to do data.lidata, data.RGB, or data.imageDepth
 
+```c++
+struct RobotData 
+    sensor_msgs::Image rgbImage;    // Camera RGB image data
+    sensor_msgs::Image depthImage;  // Camera depth image data
+    sensor_msgs::LaserScan laserScan;  // Laser scan data
+```
+
 The goal is to have a major calcuation function that will return a point in x,y for the movenment libary.
 
 since we have which I believe to be the same formatt as the ACKERMAN car as las time which should make it somewhat easy. 
@@ -65,24 +72,20 @@ The method file will send this point from sensory data processing and the curren
 
 
 
-### Documentation
+### To do list
 
-In source documentation is a must, we will examine all code submitted for supporting documentation. You also need the dox file (mainpage.dox) to indicate how the code will run/behave. You need to modiy the mainpage.dox included which does not have any specific documentation.
+- Set up github (Done)
+- Set up Ros work space (everyone)
+- Set up git link to linix (everyone)
+- Set up Code structure (Done)
+- Set up code structure cmake to work with ros(Done)
+- Set up ros callback and publisher systems (Done)
+- Set up main method loop (Basic draft done)
+- Set up test makergoal to see in sim 
+- Set up movenment calculations 
+- Set up image processing lida
+- Set up image processing RGB Colour and depth
 
-In ROS, doxygen documentation in generated using the `rosdoc_lite` tool. If you do not have the tool you can install it via `sudo apt-get install ros-noetic-rosdoc-lite` (replace noetic with melodic if on 18.04)
-
-To generate the documentation'
-
-```bash
-cd ~/catkin_ws/src/a3_skeleton
-rosdoc_lite .
-```
-
-You will find the documentation inside doc folder.
-
-```bash
-firefox ~/catkin_ws/src/a3_skeleton/doc/html/index.html
-```
 
 
 
