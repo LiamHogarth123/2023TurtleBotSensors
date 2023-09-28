@@ -38,7 +38,7 @@ The code:
 
 This code structure has 3 sections. Similar to PFMS we have has cpp file called method that was called sample in PFMS. Remeber the main method creates a new thread running within method.
 
-![Blank diagram (2)](https://github.com/LiamHogarth123/2023TurtleBotSensors/assets/126121211/41615304-ec91-4d7d-9666-02ce4be182c1)
+![Blank diagram (3)](https://github.com/LiamHogarth123/2023TurtleBotSensors/assets/126121211/82dd4d19-e188-4825-aee1-d90663f161f6)
 
 
 ### **method file (main parent file)**
