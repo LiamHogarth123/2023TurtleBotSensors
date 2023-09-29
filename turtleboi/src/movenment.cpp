@@ -21,7 +21,7 @@ void Movenment::newGoal(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_
     Current_Pose = temp_Current_Pose;
 }
 
-geometry_msgs::Twist Movenment::Cacluation(){
+geometry_msgs::Twist Movenment::reachGoal(){
     //do math to caclule the required linear and angular velocity to reach point
     geometry_msgs::Twist Directions;
 

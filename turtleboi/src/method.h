@@ -47,6 +47,8 @@ public:
 
   void seperateThread();
 
+  void run();
+
 
 
   // Prameters for ros

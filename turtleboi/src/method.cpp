@@ -37,18 +37,16 @@ Method::Method(ros::NodeHandle nh) :
   
 };
 
-
-
-
-
-void Method::Send_cmd(geometry_msgs::Twist intructions){
-  cmd_velocity.publish(intructions);
-}
-
 void Method::seperateThread() {
 
-  Sensorprocessing eyeballs(Update_Robot_Image_data());
-  Movenment GPS(goal, Current_Odom);
+
+}
+
+
+void Method::run()  {
+  //runs the program
+  Sensorprocessing scanData(Update_Robot_Image_data()); // gets current scan data from sensors
+  Movenment setGoal(goal, Current_Odom); // sets next goal 
 
 
   //test loop
@@ -63,17 +61,23 @@ void Method::seperateThread() {
 
 
   //Final loop
-  while (true){
-    eyeballs.Newdata(Update_Robot_Image_data());
-    goal = eyeballs.CalculateMidPoint();
-    GPS.newGoal(goal, Current_Odom);
-    traj = GPS.Cacluation();
+  while (true){ 
+    scanData.Newdata(Update_Robot_Image_data());
+    goal = scanData.CalculateMidPoint();
+    setGoal.newGoal(goal, Current_Odom);
+    traj =setGoal.reachGoal();
     Send_cmd(traj);
     //could add section to watch odom as gets close and brake
     
   }
-
 }
+
+
+void Method::Send_cmd(geometry_msgs::Twist intructions){
+  cmd_velocity.publish(intructions);
+}
+
+
 
 
 //callbacks
