@@ -3,7 +3,7 @@
 
 # since this file is sourced either use the provided _CATKIN_SETUP_DIR
 # or fall back to the destination set at configure time
-: ${_CATKIN_SETUP_DIR:=/home/liam/git/2023TurtleBotSensors/turtleboi/build/devel}
+: ${_CATKIN_SETUP_DIR:=/home/dan/2023TurtleBotSensors/turtleboi/build/devel}
 CATKIN_SETUP_UTIL_ARGS="--extend --local"
 . "$_CATKIN_SETUP_DIR/setup.sh"
 unset CATKIN_SETUP_UTIL_ARGS

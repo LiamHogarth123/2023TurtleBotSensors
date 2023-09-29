@@ -57,7 +57,7 @@ void Method::seperateThread() {
     test.linear.x = 1;
     test.linear.z = 1;
     test.linear.y = 1;
-    test.angular.y = 0.5;
+    test.angular.z = 0.2;
     Send_cmd(test);
   }
 
