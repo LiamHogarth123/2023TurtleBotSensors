@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Site BuildName="(empty)"
-	BuildStamp="20230929-0709-Experimental"
+	BuildStamp="20230930-0214-Experimental"
 	Name="ubuntu"
 	Generator="ctest-3.10.2"
 	CompilerName="/usr/bin/c++"
@@ -18,17 +18,17 @@
 	ProcessorCacheSize="8192"
 	NumberOfLogicalCPU="4"
 	NumberOfPhysicalCPU="4"
-	TotalVirtualMemory="1425"
-	TotalPhysicalMemory="3901"
+	TotalVirtualMemory="1186"
+	TotalPhysicalMemory="7927"
 	LogicalProcessorsPerPhysical="1"
-	ProcessorClockFrequency="1497.59"
+	ProcessorClockFrequency="1497.6"
 	>
 	<Testing>
-		<StartDateTime>Sep 29 00:09 PDT</StartDateTime>
-		<StartTestTime>1695971372</StartTestTime>
+		<StartDateTime>Sep 29 20:41 PDT</StartDateTime>
+		<StartTestTime>1696045291</StartTestTime>
 		<TestList/>
-		<EndDateTime>Sep 29 00:09 PDT</EndDateTime>
-		<EndTestTime>1695971372</EndTestTime>
+		<EndDateTime>Sep 29 20:41 PDT</EndDateTime>
+		<EndTestTime>1696045291</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

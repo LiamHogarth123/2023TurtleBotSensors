@@ -24,6 +24,8 @@ class Movenment
 
     geometry_msgs::Twist reachGoal();
 
+    bool goal_hit(nav_msgs::Odometry temp_Current_Pose);
+
 
 
 
@@ -32,6 +34,15 @@ class Movenment
     private:
     geometry_msgs::Point Goal;
     nav_msgs::Odometry Current_Pose;
+
+    //Calculation variable declaration
+    double Deta_x;
+    double Deta_y;
+    double DirectDistance
+    double Angle
+    double theta
+    double radius
+
 
 
 };

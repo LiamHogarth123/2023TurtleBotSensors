@@ -38,7 +38,7 @@ Method::Method(ros::NodeHandle nh) :
 };
 
 void Method::seperateThread() {
-
+  run();
 
 }
 
@@ -46,27 +46,37 @@ void Method::seperateThread() {
 void Method::run()  {
   //runs the program
   Sensorprocessing scanData(Update_Robot_Image_data()); // gets current scan data from sensors
-  Movenment setGoal(goal, Current_Odom); // sets next goal 
+  Movenment GPS(goal, Current_Odom); // sets next goal 
 
 
-  //test loop
-  while(true) {
-    geometry_msgs::Twist test;
-    test.linear.x = 1;
-    test.linear.z = 1;
-    test.linear.y = 1;
-    test.angular.z = 0.2;
-    Send_cmd(test);
-  }
+  // test loop
+  // while(true) {
+  //   geometry_msgs::Twist test;
+  //   test.linear.x = 2;
+  //   test.linear.z = 1;
+  //   test.linear.y = 1;
+  //   test.angular.z = 0.2;
+  //   Send_cmd(test);
+  // }
 
 
   //Final loop
   while (true){ 
     scanData.Newdata(Update_Robot_Image_data());
     goal = scanData.CalculateMidPoint();
-    setGoal.newGoal(goal, Current_Odom);
-    traj =setGoal.reachGoal();
+    std::cout << goal.x << std::endl;
+    GPS.newGoal(goal, Current_Odom);
+    geometry_msgs::Twist traj =GPS.reachGoal();
+    std::cout << traj.linear.x << std::endl;
+    std::cout << traj.angular.z << std::endl;
     Send_cmd(traj);
+    
+    // bool Reached_goal = false;
+    // while (!Reached_goal){
+    //   Reached_goal = GPS.goal_hit(Current_Odom);
+    // }
+    // Brake();
+    
     //could add section to watch odom as gets close and brake
     
   }
@@ -74,6 +84,16 @@ void Method::run()  {
 
 
 void Method::Send_cmd(geometry_msgs::Twist intructions){
+  cmd_velocity.publish(intructions);
+
+}
+
+void Method::Brake(){
+  geometry_msgs::Twist intructions;
+  intructions.linear.x = 0;
+  intructions.linear.y = 0;
+  intructions.linear.z = 0;
+  intructions.angular.z = 0;
   cmd_velocity.publish(intructions);
 }
 

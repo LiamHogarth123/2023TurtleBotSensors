@@ -44,6 +44,9 @@ public:
 
   void Send_cmd(geometry_msgs::Twist intructions);
 
+  void Brake();
+
+
 
   void seperateThread();
 

@@ -6,5 +6,5 @@ CXX_FLAGS = -std=c++11  -Wno-deprecated -Wdeprecated-declarations -g -fPIC   -st
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"turtleboi\" -Dturtleboi_movenment_EXPORTS
 
-CXX_INCLUDES = -I/home/dan/2023TurtleBotSensors/turtleboi/include -I/home/dan/2023TurtleBotSensors/turtleboi/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 
+CXX_INCLUDES = -I/home/liam/git/2023TurtleBotSensors/turtleboi/include -I/home/liam/git/2023TurtleBotSensors/turtleboi/src -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 
 
