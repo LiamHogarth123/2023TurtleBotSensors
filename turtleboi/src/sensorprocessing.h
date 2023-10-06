@@ -24,6 +24,11 @@ public:
 
   void Newdata(RobotData temp_data);
 
+  geometry_msgs::Point polarToCart(unsigned int index);
+
+  geometry_msgs::Point findTurtlebot();
+
+
 
   private:
   RobotData Image_data;
