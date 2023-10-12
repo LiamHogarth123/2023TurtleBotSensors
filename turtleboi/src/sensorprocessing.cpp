@@ -5,6 +5,7 @@ using namespace std;
 
 Sensorprocessing::Sensorprocessing(RobotData New_Data){   
     Image_data = New_Data;
+    Turtlebot_width = 210;
 }
 
 void Sensorprocessing::Newdata(RobotData temp_data){
@@ -24,51 +25,49 @@ geometry_msgs::Point Sensorprocessing::CalculateMidPoint(){
 }
 
 geometry_msgs::Point Sensorprocessing::findTurtlebot(){
-    std::vector<std::pair<geometry_msgs::Point, int>> segments; //float for the average range of that segments and int is the center point of said segments
+    geometry_msgs::Point segments; //float for the average range of that segments and int is the center point of said segments
 
-    for (int i = 1; i < laserScan_.ranges.size(); i++) { // for all readings
-        float currentRange = laserScan_.ranges.at(i);
-        float prevRange = laserScan_.ranges.at(i - 1);
-        float distance = fabs(currentRange - prevRange);
-
-
+        for (int i = 1; i < laserScan_.ranges.size(); i++) { // for all readings
+            float currentRange = laserScan_.ranges.at(i);
+            float prevRange = laserScan_.ranges.at(i - 1);
+            float range = fabs(currentRange - prevRange);
 
 
+            if(!std::isinf(laserScan_.ranges.at(i))){ // if the number isn't infinity
+                int i_start = i;
+            
+                while(!std::isinf(laserScan_.ranges.at(i))&& distance <= 0.3){
+                    if (i == laserScan_.ranges.size()-1){
+                        
+                        break;
+                    }
+                    i++;
+                    currentRange = laserScan_.ranges.at(i);
+                    prevRange = laserScan_.ranges.at(i - 1);
+                    range = fabs(currentRange - prevRange);
+                } 
+                
+                int i_end = i-1;
+                int i_center = i_start+(i_end-i_start)/2;
 
-        if(!std::isinf(laserScan_.ranges.at(i))){ // if the number isn't infinity
-            int i_start = i;
-          
-            while(!std::isinf(laserScan_.ranges.at(i))&& distance <= 0.3){
-                if (i == laserScan_.ranges.size()-1){
+                geometry_msgs::Point pt1 =polarToCart(i_start);
+                geometry_msgs::Point pt2 =polarToCart(i_end);
+
+                double distance = pow(pow((pt1.x-pt2.x),2)+pow((pt1.y-pt2.y),2),0.5);
+
+                if (distance < (Turtlebot_width+0.1) && distance > (Turtlebot_width - 0.1)){
+
+                    geometry_msgs::Point Cone_center;
+
+                    Cone_center.x = ((pt1.x + pt2.x) / 2);
+                    Cone_center.y = ((pt1.y + pt2.y) / 2);
                     
-                    break;
+                    segment = Cone_center;
+                
+                
                 }
-                i++;
-                currentRange = laserScan_.ranges.at(i);
-                prevRange = laserScan_.ranges.at(i - 1);
-                distance = fabs(currentRange - prevRange);
-            } 
-            
-            int i_end = i-1;
-            int i_center = i_start+(i_end-i_start)/2;
-
-            geometry_msgs::Point pt1 =polarToCart(i_start);
-            geometry_msgs::Point pt2 =polarToCart(i_end);
-
-            double distance = pow(pow((pt1.x-pt2.x),2)+pow((pt1.y-pt2.y),2),0.5);
-
-            if (distance < 0.5){
-
-                geometry_msgs::Point Cone_center;
-
-                Cone_center.x = ((pt1.x + pt2.x) / 2);
-                Cone_center.y = ((pt1.y + pt2.y) / 2);
-            
-               
-                segments.push_back(make_pair(Cone_center, i_center));
             }
         }
-    }
 
     return segments;
 
