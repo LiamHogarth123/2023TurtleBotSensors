@@ -34,7 +34,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
 
     radius = (DirectDistance/sin(theta))*sin(90-Angle);
 
-    double default_velocity = 1
+    double default_velocity = 1;
 
 
     Directions.linear.x = default_velocity;

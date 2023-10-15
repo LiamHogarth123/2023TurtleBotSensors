@@ -32,6 +32,7 @@ public:
 
   private:
   RobotData Image_data;
+  double Turtlebot_width;
 
 };
 

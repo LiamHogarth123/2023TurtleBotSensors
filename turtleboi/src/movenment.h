@@ -38,10 +38,10 @@ class Movenment
     //Calculation variable declaration
     double Deta_x;
     double Deta_y;
-    double DirectDistance
-    double Angle
-    double theta
-    double radius
+    double DirectDistance;
+    double Angle;
+    double theta;
+    double radius;
 
 
 
