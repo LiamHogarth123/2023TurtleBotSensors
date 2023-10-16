@@ -19,8 +19,7 @@ Method::Method(ros::NodeHandle nh) :
 //Ros construction
 //Subscribing to TurtleBot3 ROS features
 
-scanData = Sensorprocessing(),
-GPS = Movenment();
+
 
 // Robot 1 -----------------------------------------------------
   sub1_ = nh_.subscribe("tb3_0/odom", 1000, &Method::odomCallback,this);

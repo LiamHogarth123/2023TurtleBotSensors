@@ -55,26 +55,10 @@ sensor_msgs/Image.h
 -
 image_data_struct.h
 -
-sensorprocessing.cpp
-/home/liam/git/2023TurtleBotSensors/turtleboi/src/sensorprocessing.cpp
-movenment.cpp
-/home/liam/git/2023TurtleBotSensors/turtleboi/src/movenment.cpp
-
-/home/liam/git/2023TurtleBotSensors/turtleboi/src/movenment.cpp
+sensorprocessing.h
+/home/liam/git/2023TurtleBotSensors/turtleboi/src/sensorprocessing.h
 movenment.h
 /home/liam/git/2023TurtleBotSensors/turtleboi/src/movenment.h
-algorithm
--
-numeric
--
-cmath
--
-vector
--
-algorithm
--
-geometry_msgs/Point.h
--
 
 /home/liam/git/2023TurtleBotSensors/turtleboi/src/movenment.h
 math.h
@@ -85,10 +69,6 @@ geometry_msgs/Twist.h
 -
 nav_msgs/Odometry.h
 -
-
-/home/liam/git/2023TurtleBotSensors/turtleboi/src/sensorprocessing.cpp
-sensorprocessing.h
-/home/liam/git/2023TurtleBotSensors/turtleboi/src/sensorprocessing.h
 
 /home/liam/git/2023TurtleBotSensors/turtleboi/src/sensorprocessing.h
 sensor_msgs/LaserScan.h

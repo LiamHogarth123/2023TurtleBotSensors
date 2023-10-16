@@ -16,8 +16,8 @@
 #include <image_data_struct.h>
 //Keep only the headers needed
 
-#include "sensorprocessing.cpp"
-#include "movenment.cpp"
+#include "sensorprocessing.h"
+#include "movenment.h"
 
 
 

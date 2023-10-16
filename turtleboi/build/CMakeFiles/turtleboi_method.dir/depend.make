@@ -4,9 +4,7 @@
 CMakeFiles/turtleboi_method.dir/src/main.cpp.o: ../src/image_data_struct.h
 CMakeFiles/turtleboi_method.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/turtleboi_method.dir/src/main.cpp.o: ../src/method.h
-CMakeFiles/turtleboi_method.dir/src/main.cpp.o: ../src/movenment.cpp
 CMakeFiles/turtleboi_method.dir/src/main.cpp.o: ../src/movenment.h
-CMakeFiles/turtleboi_method.dir/src/main.cpp.o: ../src/sensorprocessing.cpp
 CMakeFiles/turtleboi_method.dir/src/main.cpp.o: ../src/sensorprocessing.h
 CMakeFiles/turtleboi_method.dir/src/main.cpp.o: /opt/ros/melodic/include/geometry_msgs/Point.h
 CMakeFiles/turtleboi_method.dir/src/main.cpp.o: /opt/ros/melodic/include/geometry_msgs/PointStamped.h
@@ -96,9 +94,7 @@ CMakeFiles/turtleboi_method.dir/src/main.cpp.o: /opt/ros/melodic/include/xmlrpcp
 CMakeFiles/turtleboi_method.dir/src/method.cpp.o: ../src/image_data_struct.h
 CMakeFiles/turtleboi_method.dir/src/method.cpp.o: ../src/method.cpp
 CMakeFiles/turtleboi_method.dir/src/method.cpp.o: ../src/method.h
-CMakeFiles/turtleboi_method.dir/src/method.cpp.o: ../src/movenment.cpp
 CMakeFiles/turtleboi_method.dir/src/method.cpp.o: ../src/movenment.h
-CMakeFiles/turtleboi_method.dir/src/method.cpp.o: ../src/sensorprocessing.cpp
 CMakeFiles/turtleboi_method.dir/src/method.cpp.o: ../src/sensorprocessing.h
 CMakeFiles/turtleboi_method.dir/src/method.cpp.o: /opt/ros/melodic/include/geometry_msgs/Point.h
 CMakeFiles/turtleboi_method.dir/src/method.cpp.o: /opt/ros/melodic/include/geometry_msgs/PointStamped.h

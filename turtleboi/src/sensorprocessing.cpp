@@ -4,7 +4,6 @@
 using namespace std;
 
 Sensorprocessing::Sensorprocessing(){   
-
     Turtlebot_width = 210;
 }
 
@@ -28,23 +27,23 @@ geometry_msgs::Point Sensorprocessing::findTurtlebot(){
     geometry_msgs::Point segments; //float for the average range of that segments and int is the center point of said segments
 
         for (int i = 1; i < Image_data.laserScan.ranges.size(); i++) { // for all readings
-            float currentRange = Image_data.laserScan.ranges.at(i);
-            float prevRange = Image_data.laserScan.ranges.at(i - 1);
-            float range = fabs(currentRange - prevRange);
+            // float currentRange = Image_data.laserScan.ranges.at(i);
+            // float prevRange = Image_data.laserScan.ranges.at(i - 1);
+            // float range = fabs(currentRange - prevRange);
 
 
             if(!std::isinf(Image_data.laserScan.ranges.at(i))){ // if the number isn't infinity
                 int i_start = i;
             
-                while(!std::isinf(Image_data.laserScan.ranges.at(i))&& range <= 0.3){
+                while(!std::isinf(Image_data.laserScan.ranges.at(i))){
                     if (i == Image_data.laserScan.ranges.size()-1){
                         
                         break;
                     }
                     i++;
-                    currentRange = Image_data.laserScan.ranges.at(i);
-                    prevRange = Image_data.laserScan.ranges.at(i - 1);
-                    range = fabs(currentRange - prevRange);
+                    // currentRange = Image_data.laserScan.ranges.at(i);
+                    // prevRange = Image_data.laserScan.ranges.at(i - 1);
+                    // range = fabs(currentRange - prevRange);
                 } 
                 
                 int i_end = i-1;
