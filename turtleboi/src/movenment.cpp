@@ -11,9 +11,8 @@
 */
 
 
-Movenment::Movenment(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose){
-    Goal = temp_goal;
-    Current_Pose = temp_Current_Pose;
+Movenment::Movenment(){
+
 }
 
 void Movenment::newGoal(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose){

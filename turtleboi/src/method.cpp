@@ -9,9 +9,6 @@
 // #include <kobuki_msgs/DigitalOutput.h>
 #include "ros/ros.h"
 
-#include "sensorprocessing.cpp"
-#include "movenment.cpp"
-
 using std::cout;
 using std::endl;
 
@@ -22,7 +19,10 @@ Method::Method(ros::NodeHandle nh) :
 //Ros construction
 //Subscribing to TurtleBot3 ROS features
 
-// namespace is tb3_0 
+scanData = Sensorprocessing(),
+GPS = Movenment();
+
+// Robot 1 -----------------------------------------------------
   sub1_ = nh_.subscribe("tb3_0/odom", 1000, &Method::odomCallback,this);
 
   sub2_ = nh_.subscribe("tb3_0/scan", 10, &Method::LidaCallback,this);
@@ -33,17 +33,20 @@ Method::Method(ros::NodeHandle nh) :
 
   cmd_velocity_tb1 = nh_.advertise<geometry_msgs::Twist>("tb3_0/cmd_vel",10);
 
-// namespace is tb3_1
 
-  sub5_ = nh_.subscribe("tb3_1/odom", 1000, &Method::odomCallback,this);
 
-  sub6_ = nh_.subscribe("tb3_1/scan", 10, &Method::LidaCallback,this);
 
-  sub7_ = nh_.subscribe("tb3_1/camera/rgb/image_raw", 1000, &Method::RGBCallback, this);
+  // Robot 2 leader ---------------------
 
-  sub8_ = nh_.subscribe("tb3_0/camera/depth/image_raw", 1000, &Method::ImageDepthCallback, this);
+  // sub5_ = nh_.subscribe("tb3_1/odom", 1000, &Method::odomCallback,this);
 
-  cmd_velocity_tb2 = nh.advertise<geometry_msgs::Twist>("tb3_1/cmd_vel",10);
+  // sub6_ = nh_.subscribe("tb3_1/scan", 10, &Method::LidaCallback,this);
+
+  // sub7_ = nh_.subscribe("tb3_1/camera/rgb/image_raw", 1000, &Method::RGBCallback, this);
+
+  // sub8_ = nh_.subscribe("tb3_0/camera/depth/image_raw", 1000, &Method::ImageDepthCallback, this);
+
+  // cmd_velocity_tb2 = nh.advertise<geometry_msgs::Twist>("tb3_1/cmd_vel",10);
 
 
   // Led1 = nh_.advertise<kobuki_msgs::DigitalOutput>("/mobile_base/commands/led1",10);
@@ -53,15 +56,35 @@ Method::Method(ros::NodeHandle nh) :
 };
 
 void Method::seperateThread() {
-  run();
+    scanData.Newdata(Update_Robot_Image_data()); // gets current scan data from sensors
+    GPS.newGoal(goal, Current_Odom); // sets next goal 
+
+    std::thread myThread(&Method::threadForSensor, this);
+    while (true){
+      run();
+    }
+  
+  myThread.join();
 
 }
 
 
 void Method::run()  {
   //runs the program
-  Sensorprocessing scanData(Update_Robot_Image_data()); // gets current scan data from sensors
-  Movenment GPS(goal, Current_Odom); // sets next goal 
+
+  goal_lock.lock();
+  GPS.newGoal(goal, Current_Odom);
+  goal_lock.unlock();
+
+  geometry_msgs::Twist traj =GPS.reachGoal();
+
+  std::cout << traj.linear.x << std::endl;
+  std::cout << traj.angular.z << std::endl;
+  Send_cmd_tb1(traj);
+  
+
+
+
 
 
   // test loop
@@ -76,15 +99,15 @@ void Method::run()  {
 
 
   //Final loop
-  while (true){ 
-    scanData.Newdata(Update_Robot_Image_data());
-    goal = scanData.CalculateMidPoint();
-    std::cout << goal.x << std::endl;
-    GPS.newGoal(goal, Current_Odom);
-    geometry_msgs::Twist traj =GPS.reachGoal();
-    std::cout << traj.linear.x << std::endl;
-    std::cout << traj.angular.z << std::endl;
-    Send_cmd_tb1(traj);
+  // while (true){ 
+  //   scanData.Newdata(Update_Robot_Image_data());
+  //   goal = scanData.CalculateMidPoint();
+  //   std::cout << goal.x << std::endl;
+  //   GPS.newGoal(goal, Current_Odom);
+  //   geometry_msgs::Twist traj =GPS.reachGoal();
+  //   std::cout << traj.linear.x << std::endl;
+  //   std::cout << traj.angular.z << std::endl;
+  //   Send_cmd_tb1(traj);
     
     // bool Reached_goal = false;
     // while (!Reached_goal){
@@ -94,8 +117,25 @@ void Method::run()  {
     
     //could add section to watch odom as gets close and brake
     
-  }
+  
 }
+
+
+
+void Method:: threadForSensor(){
+    while(true){
+        scanData.Newdata(Update_Robot_Image_data());
+        goal_lock.lock();
+        goal = scanData.CalculateMidPoint();
+        goal_lock.unlock();
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+    }
+}
+
+
+
+
+
 
 
 void Method::Send_cmd_tb1(geometry_msgs::Twist intructions){

@@ -3,8 +3,8 @@
 
 using namespace std;
 
-Sensorprocessing::Sensorprocessing(RobotData New_Data){   
-    Image_data = New_Data;
+Sensorprocessing::Sensorprocessing(){   
+
     Turtlebot_width = 210;
 }
 

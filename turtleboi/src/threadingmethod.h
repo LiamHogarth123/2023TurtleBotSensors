@@ -30,7 +30,7 @@ public:
   @brief Default constructor.
   @param nh The ROS node handle.
   */
-  Method(ros::NodeHandle nh);
+  ThreadingMethod(ros::NodeHandle nh);
 
 
   void odomCallback(const nav_msgs::Odometry::ConstPtr& odomMsg);

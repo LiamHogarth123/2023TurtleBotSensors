@@ -18,7 +18,7 @@ public:
    *
    *  @param[in]    laserScan - laserScan to be processed
    */
-  Sensorprocessing(RobotData New_data);
+  Sensorprocessing();
 
   geometry_msgs::Point CalculateMidPoint();
 

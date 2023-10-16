@@ -18,7 +18,7 @@ class Movenment
     /**
     @brief Constructor for the DataProcessing class.
     */
-    Movenment(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose);
+    Movenment();
 
     void newGoal(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose );
 

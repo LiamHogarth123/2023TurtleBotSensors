@@ -16,6 +16,9 @@
 #include <image_data_struct.h>
 //Keep only the headers needed
 
+#include "sensorprocessing.cpp"
+#include "movenment.cpp"
+
 
 
 
@@ -42,6 +45,9 @@ public:
   RobotData Update_Robot_Image_data();
 
 
+
+
+
   void Send_cmd_tb1(geometry_msgs::Twist intructions);
 
   // void Send_cmd_tb2(geometry_msgs::Twist intructions);
@@ -53,6 +59,7 @@ public:
 
   void run();
 
+  void threadForSensor();
 
 
   // Prameters for ROS
@@ -75,11 +82,12 @@ public:
   ros::Subscriber sub7_;
   ros::Subscriber sub8_;
 
-
+//mutexs
   std::mutex odom_locker;
   std::mutex RGB_locker;
   std::mutex Lida_locker;
   std::mutex ImageDepth_locker;
+  std::mutex goal_lock;
 
   nav_msgs::Odometry Current_Odom;
   sensor_msgs::Image updated_RGB;
@@ -90,6 +98,9 @@ public:
   geometry_msgs::Point goal;
   geometry_msgs::Twist traj;
 
+
+  Movenment GPS;
+  Sensorprocessing scanData;
 };
 
   
