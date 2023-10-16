@@ -20,16 +20,31 @@ Method::Method(ros::NodeHandle nh) :
   // laserProcessingPtr_(nullptr)
 {
 //Ros construction
-//Subscribing to odometry UGV
-  sub1_ = nh_.subscribe("/odom", 1000, &Method::odomCallback,this);
+//Subscribing to TurtleBot3 ROS features
 
-  sub2_ = nh_.subscribe("/scan", 10, &Method::LidaCallback,this);
+// namespace is tb3_0 
+  sub1_ = nh_.subscribe("tb3_0/odom", 1000, &Method::odomCallback,this);
 
-  sub3_ = nh_.subscribe("/camera/rgb/image_raw", 1000, &Method::RGBCallback, this);
+  sub2_ = nh_.subscribe("tb3_0/scan", 10, &Method::LidaCallback,this);
 
-  sub4_ = nh_.subscribe("/camera/depth/image_raw", 1000, &Method::ImageDepthCallback, this);
+  sub3_ = nh_.subscribe("tb3_0/camera/rgb/image_raw", 1000, &Method::RGBCallback, this);
 
-  cmd_velocity = nh_.advertise<geometry_msgs::Twist>("/cmd_vel",10);
+  sub4_ = nh_.subscribe("tb3_0/camera/depth/image_raw", 1000, &Method::ImageDepthCallback, this);
+
+  cmd_velocity_tb1 = nh_.advertise<geometry_msgs::Twist>("tb3_0/cmd_vel",10);
+
+// namespace is tb3_1
+
+  sub5_ = nh_.subscribe("tb3_1/odom", 1000, &Method::odomCallback,this);
+
+  sub6_ = nh_.subscribe("tb3_1/scan", 10, &Method::LidaCallback,this);
+
+  sub7_ = nh_.subscribe("tb3_1/camera/rgb/image_raw", 1000, &Method::RGBCallback, this);
+
+  sub8_ = nh_.subscribe("tb3_0/camera/depth/image_raw", 1000, &Method::ImageDepthCallback, this);
+
+  cmd_velocity_tb2 = nh.advertise<geometry_msgs::Twist>("tb3_1/cmd_vel",10);
+
 
   // Led1 = nh_.advertise<kobuki_msgs::DigitalOutput>("/mobile_base/commands/led1",10);
 
@@ -69,7 +84,7 @@ void Method::run()  {
     geometry_msgs::Twist traj =GPS.reachGoal();
     std::cout << traj.linear.x << std::endl;
     std::cout << traj.angular.z << std::endl;
-    Send_cmd(traj);
+    Send_cmd_tb1(traj);
     
     // bool Reached_goal = false;
     // while (!Reached_goal){
@@ -83,10 +98,15 @@ void Method::run()  {
 }
 
 
-void Method::Send_cmd(geometry_msgs::Twist intructions){
-  cmd_velocity.publish(intructions);
+void Method::Send_cmd_tb1(geometry_msgs::Twist intructions){
+  cmd_velocity_tb1.publish(intructions);
 
 }
+
+// void Method::Send_cmd_tb2(geometry_msgs::Twist intructions){
+//   cmd_velocity_tb2.publish(intructions);
+
+// }
 
 void Method::Brake(){
   geometry_msgs::Twist intructions;
@@ -94,7 +114,7 @@ void Method::Brake(){
   intructions.linear.y = 0;
   intructions.linear.z = 0;
   intructions.angular.z = 0;
-  cmd_velocity.publish(intructions);
+  cmd_velocity_tb1.publish(intructions);
 }
 
 

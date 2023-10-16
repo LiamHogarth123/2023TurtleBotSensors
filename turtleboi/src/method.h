@@ -42,11 +42,12 @@ public:
   RobotData Update_Robot_Image_data();
 
 
-  void Send_cmd(geometry_msgs::Twist intructions);
+  void Send_cmd_tb1(geometry_msgs::Twist intructions);
+
+  // void Send_cmd_tb2(geometry_msgs::Twist intructions);
+
 
   void Brake();
-
-
 
   void seperateThread();
 
@@ -54,20 +55,26 @@ public:
 
 
 
-  // Prameters for ros
+  // Prameters for ROS
   ros::NodeHandle nh_;
-  ros::Publisher cmd_velocity;//! Visualisation Marker publisher
+  ros::Publisher cmd_velocity_tb1;
+  ros::Publisher cmd_velocity_tb2;
   ros::Publisher Led1;
   ros::Publisher Led2;
  
 
-
-
-
-  ros::Subscriber sub1_;  // Few subscribers
+// Subscribers for turtlebot 1 (tb3_0)
+  ros::Subscriber sub1_;
   ros::Subscriber sub2_;
   ros::Subscriber sub3_;
   ros::Subscriber sub4_;
+
+// Subscribers for turtlebot 2 (tb3_1)
+  ros::Subscriber sub5_;
+  ros::Subscriber sub6_;
+  ros::Subscriber sub7_;
+  ros::Subscriber sub8_;
+
 
   std::mutex odom_locker;
   std::mutex RGB_locker;
