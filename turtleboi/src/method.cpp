@@ -55,9 +55,10 @@ Method::Method(ros::NodeHandle nh) :
 };
 
 void Method::seperateThread() {
+  
     scanData.Newdata(Update_Robot_Image_data()); // gets current scan data from sensors
     GPS.newGoal(goal, Current_Odom); // sets next goal 
-
+    
     std::thread myThread(&Method::threadForSensor, this);
     while (true){
       run();
@@ -125,8 +126,10 @@ void Method:: threadForSensor(){
     while(true){
         scanData.Newdata(Update_Robot_Image_data());
         goal_lock.lock();
-        goal = scanData.CalculateMidPoint();
+        goal = scanData.findTurtlebot();
         goal_lock.unlock();
+        
+
         std::this_thread::sleep_for(std::chrono::seconds(3));
     }
 }
@@ -139,7 +142,6 @@ void Method:: threadForSensor(){
 
 void Method::Send_cmd_tb1(geometry_msgs::Twist intructions){
   cmd_velocity_tb1.publish(intructions);
-
 }
 
 // void Method::Send_cmd_tb2(geometry_msgs::Twist intructions){
