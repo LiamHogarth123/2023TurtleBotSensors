@@ -52,6 +52,7 @@ public:
 
   // void Send_cmd_tb2(geometry_msgs::Twist intructions);
 
+  void  threadForSensor();
 
   void Brake();
 
@@ -59,7 +60,9 @@ public:
 
   void run();
 
-  void threadForSensor();
+  void singleThread();
+
+  geometry_msgs::Point adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position);
 
 
   // Prameters for ROS
@@ -96,7 +99,9 @@ public:
 
   RobotData Image_data;
   geometry_msgs::Point goal;
+  geometry_msgs::Point goal_gobal_frame;
   geometry_msgs::Twist traj;
+
 
 
   Movenment GPS;

@@ -29,9 +29,6 @@ geometry_msgs::Point Sensorprocessing::findTurtlebot(){
 
 
     for (int i = 1; i < Image_data.laserScan.ranges.size(); i++) { // for all readings
-        // float currentRange = Image_data.laserScan.ranges.at(i);
-        // float prevRange = Image_data.laserScan.ranges.at(i - 1);
-        // float range = fabs(currentRange - prevRange);
 
 
         if(!std::isinf(Image_data.laserScan.ranges.at(i))){ // if the number isn't infinity
@@ -39,14 +36,10 @@ geometry_msgs::Point Sensorprocessing::findTurtlebot(){
         
             while(!std::isinf(Image_data.laserScan.ranges.at(i))){
                 if (i == Image_data.laserScan.ranges.size()-1){
-                    
                     break;
                 }
-                std::cout << Image_data.laserScan.ranges.at(i) << std::endl;
                 i++;
-                // currentRange = Image_data.laserScan.ranges.at(i);
-                // prevRange = Image_data.laserScan.ranges.at(i - 1);
-                // range = fabs(currentRange - prevRange);
+            
             } 
             
             int i_end = i-1;
@@ -76,16 +69,9 @@ geometry_msgs::Point Sensorprocessing::findTurtlebot(){
         }
     }
 
-    std::cout << segments.x << std::endl;
-    std::cout << segments.y << std::endl;
 return segments;
 
 }
-
-
-
-
-
 
 
 geometry_msgs::Point Sensorprocessing::polarToCart(unsigned int index)

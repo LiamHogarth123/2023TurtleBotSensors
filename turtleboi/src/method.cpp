@@ -55,13 +55,16 @@ Method::Method(ros::NodeHandle nh) :
 };
 
 void Method::seperateThread() {
-  
-    scanData.Newdata(Update_Robot_Image_data()); // gets current scan data from sensors
-    GPS.newGoal(goal, Current_Odom); // sets next goal 
+
+    bool toggle = false;
     
     std::thread myThread(&Method::threadForSensor, this);
-    while (true){
+    while (toggle == true){
       run();
+    }
+    while (toggle == false){
+      singleThread();
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
   
   myThread.join();
@@ -69,54 +72,57 @@ void Method::seperateThread() {
 }
 
 
+
+void Method::singleThread() {
+
+  scanData.Newdata(Update_Robot_Image_data());
+  
+  goal = scanData.findTurtlebot();
+
+
+  goal_gobal_frame = adjustLaserData(goal, Current_Odom);
+
+
+ 
+  GPS.newGoal(goal, Current_Odom);
+
+  if (GPS.goal_hit(Current_Odom)){
+    traj =GPS.reachGoal();
+    std::cout<< "accerlating" << std::endl;
+  }
+  else {
+    traj.linear.x = 0;
+    traj.angular.z = 0;
+    std::cout<< "brake" << std::endl;
+  }
+  Send_cmd_tb1(traj);
+}
+
+
 void Method::run()  {
   //runs the program
 
   goal_lock.lock();
-  GPS.newGoal(goal, Current_Odom);
+  goal_gobal_frame = adjustLaserData(goal, Current_Odom);
   goal_lock.unlock();
+  
+  GPS.newGoal(goal_gobal_frame, Current_Odom);
 
-  geometry_msgs::Twist traj =GPS.reachGoal();
+  if (GPS.goal_hit(Current_Odom)){
+    traj =GPS.reachGoal();
+    std::cout<< "accerlating" << std::endl;
+  }
+  else {
+    traj.linear.x = 0;
+    traj.angular.z = 0;
+    std::cout<< "brake" << std::endl;
+  }
 
-  std::cout << traj.linear.x << std::endl;
-  std::cout << traj.angular.z << std::endl;
+
   Send_cmd_tb1(traj);
   
 
 
-
-
-
-  // test loop
-  // while(true) {
-  //   geometry_msgs::Twist test;
-  //   test.linear.x = 2;
-  //   test.linear.z = 1;
-  //   test.linear.y = 1;
-  //   test.angular.z = 0.2;
-  //   Send_cmd(test);
-  // }
-
-
-  //Final loop
-  // while (true){ 
-  //   scanData.Newdata(Update_Robot_Image_data());
-  //   goal = scanData.CalculateMidPoint();
-  //   std::cout << goal.x << std::endl;
-  //   GPS.newGoal(goal, Current_Odom);
-  //   geometry_msgs::Twist traj =GPS.reachGoal();
-  //   std::cout << traj.linear.x << std::endl;
-  //   std::cout << traj.angular.z << std::endl;
-  //   Send_cmd_tb1(traj);
-    
-    // bool Reached_goal = false;
-    // while (!Reached_goal){
-    //   Reached_goal = GPS.goal_hit(Current_Odom);
-    // }
-    // Brake();
-    
-    //could add section to watch odom as gets close and brake
-    
   
 }
 
@@ -130,7 +136,7 @@ void Method:: threadForSensor(){
         goal_lock.unlock();
         
 
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
 
@@ -198,3 +204,32 @@ RobotData Method::Update_Robot_Image_data(){
 
   return Image_data;
 }
+
+
+
+geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
+    geometry_msgs::Point adjustedValues;
+    
+    // Get the orientation from the odometry message
+    geometry_msgs::Quaternion orientation = Position.pose.pose.orientation;
+    
+    // Convert the quaternion to Euler angles (roll, pitch, yaw)
+    tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
+    double roll, pitch, yaw;
+    mat.getRPY(roll, pitch, yaw);
+    
+    // Perform the coordinate transformation
+    adjustedValues.x = laser_data.x * cos(yaw) - laser_data.y * sin(yaw);
+    adjustedValues.y = laser_data.x * sin(yaw) + laser_data.y * cos(yaw);
+    
+    // Add the position offset
+    adjustedValues.x += Position.pose.pose.position.x;
+    adjustedValues.y += Position.pose.pose.position.y;
+    
+    return adjustedValues;
+}
+
+// // To fix 
+// fix negtive sqitch of Movenment
+// fix check offset of turtlebot in Movenment
+// move back to sensor DATA
