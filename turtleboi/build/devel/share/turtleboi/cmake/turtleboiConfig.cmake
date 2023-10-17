@@ -67,8 +67,8 @@ set(turtleboi_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(turtleboi_SOURCE_PREFIX /home/liam/git/2023TurtleBotSensors/turtleboi)
-  set(turtleboi_DEVEL_PREFIX /home/liam/git/2023TurtleBotSensors/turtleboi/build/devel)
+  set(turtleboi_SOURCE_PREFIX /home/dan/2023TurtleBotSensors/turtleboi)
+  set(turtleboi_DEVEL_PREFIX /home/dan/2023TurtleBotSensors/turtleboi/build/devel)
   set(turtleboi_INSTALL_PREFIX "")
   set(turtleboi_PREFIX ${turtleboi_DEVEL_PREFIX})
 else()
@@ -110,7 +110,7 @@ if(NOT " " STREQUAL " ")
         message(FATAL_ERROR "Project 'turtleboi' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'turtleboi' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/liam/git/2023TurtleBotSensors/turtleboi/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'turtleboi' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/dan/2023TurtleBotSensors/turtleboi/${idir}'.  ${_report}")
     endif()
     _list_append_unique(turtleboi_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/liam/git/2023TurtleBotSensors/turtleboi/build/devel/lib;/home/liam/catkin_ws/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/dan/2023TurtleBotSensors/turtleboi/build/devel/lib;/home/dan/catkin_ws/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

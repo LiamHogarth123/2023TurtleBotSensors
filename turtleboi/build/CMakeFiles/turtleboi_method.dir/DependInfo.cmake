@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/liam/git/2023TurtleBotSensors/turtleboi/src/main.cpp" "/home/liam/git/2023TurtleBotSensors/turtleboi/build/CMakeFiles/turtleboi_method.dir/src/main.cpp.o"
-  "/home/liam/git/2023TurtleBotSensors/turtleboi/src/method.cpp" "/home/liam/git/2023TurtleBotSensors/turtleboi/build/CMakeFiles/turtleboi_method.dir/src/method.cpp.o"
+  "/home/dan/2023TurtleBotSensors/turtleboi/src/main.cpp" "/home/dan/2023TurtleBotSensors/turtleboi/build/CMakeFiles/turtleboi_method.dir/src/main.cpp.o"
+  "/home/dan/2023TurtleBotSensors/turtleboi/src/method.cpp" "/home/dan/2023TurtleBotSensors/turtleboi/build/CMakeFiles/turtleboi_method.dir/src/method.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -27,8 +27,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/liam/git/2023TurtleBotSensors/turtleboi/build/CMakeFiles/turtleboi_movenment.dir/DependInfo.cmake"
-  "/home/liam/git/2023TurtleBotSensors/turtleboi/build/CMakeFiles/turtleboi_sensorprocessing.dir/DependInfo.cmake"
+  "/home/dan/2023TurtleBotSensors/turtleboi/build/CMakeFiles/turtleboi_movenment.dir/DependInfo.cmake"
+  "/home/dan/2023TurtleBotSensors/turtleboi/build/CMakeFiles/turtleboi_sensorprocessing.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

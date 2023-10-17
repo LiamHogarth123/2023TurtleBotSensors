@@ -61,6 +61,8 @@ public:
 
   void threadForSensor();
 
+  void singleThread();
+
 
   // Prameters for ROS
   ros::NodeHandle nh_;
