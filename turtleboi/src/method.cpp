@@ -54,7 +54,7 @@ void Method::seperateThread() {
 
 
 void Method::singleThread() {
-  FollowingRobotrun();
+  followingRobotRun();
   guiderBotMovement();
 }
 
@@ -67,19 +67,19 @@ void Method::guiderBotMovement(){
 
   GuiderGPS.newGoal(guiderGoal, guider_Odom);
   geometry_msgs::Twist traj = GuiderGPS.reachGoal();
-  if (GuiderGPS.goal_hit(guider_Odom)) {
-    Brake();
-    std::cout << "braking" << std::endl;
-  }
-  else {
+  // if (GuiderGPS.goal_hit(guider_Odom)) {
+  //   Brake();
+  //   std::cout << "braking" << std::endl;
+  // }
+  // else {
     std::cout << traj.linear.x << std::endl;
     std::cout << traj.angular.z << std::endl;
     Send_cmd_tb2(traj);
-  }
+  //}
 
 }
 
-void Method::FollowingRobotrun(){
+void Method::followingRobotRun(){
 
   scanData.Newdata(Update_Robot_Image_data());
         
@@ -87,15 +87,15 @@ void Method::FollowingRobotrun(){
 
   GPS.newGoal(goal, Current_Odom);
   
-  if (GPS.goal_hit(Current_Odom)){
+  // if (GPS.goal_hit(Current_Odom)){
     traj =GPS.reachGoal();
-    std::cout<< "accerlating" << std::endl;
-  }
-  else {
-    traj.linear.x = 0;
-    traj.angular.z = 0;
-    std::cout<< "brake" << std::endl;
-  }
+  //   std::cout<< "accerlating" << std::endl;
+  // }
+  // else {
+  //   traj.linear.x = 0;
+  //   traj.angular.z = 0;
+  //   std::cout<< "brake" << std::endl;
+  // }
 
   Send_cmd_tb1(traj);
 }
@@ -109,14 +109,14 @@ void Method::Send_cmd_tb2(geometry_msgs::Twist intructions){
   cmd_velocity_tb2.publish(intructions);
 }
 
-void Method::Brake(){
-  geometry_msgs::Twist intructions;
-  intructions.linear.x = 0;
-  intructions.linear.y = 0;
-  intructions.linear.z = 0;
-  intructions.angular.z = 0;
-  cmd_velocity_tb2.publish(intructions);
-}
+// void Method::Brake(){
+//   geometry_msgs::Twist intructions;
+//   intructions.linear.x = 0;
+//   intructions.linear.y = 0;
+//   intructions.linear.z = 0;
+//   intructions.angular.z = 0;
+//   cmd_velocity_tb2.publish(intructions);
+// }
 
 
 
