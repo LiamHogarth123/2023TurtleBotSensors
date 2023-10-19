@@ -59,7 +59,7 @@ public:
 
   void seperateThread();
 
-  void run();
+  void FollowingRobotrun();
 
 
 

@@ -54,30 +54,13 @@ void Method::seperateThread() {
 
 
 void Method::singleThread() {
-
-  scanData.Newdata(Update_Robot_Image_data());
-        
-  goal = scanData.findTurtlebot();
-
-  GPS.newGoal(goal, Current_Odom);
-
-  geometry_msgs::Twist traj = GPS.reachGoal();
-
-  Send_cmd_tb1(traj);
-
-  // guiderBotMovement();
-    
+  FollowingRobotrun();
+  guiderBotMovement();
 }
 
 void Method::guiderBotMovement(){
-    
-  // geometry_msgs::Twist test;
-  // test.linear.x = 0.1;
-  // test.linear.z = 0;
-  // test.linear.y = 0;
-  // test.angular.z = 0.1;
-  // Send_cmd_tb2(test);
-
+  
+  
   geometry_msgs::Point guiderGoal;
   guiderGoal.x = 20;
   guiderGoal.y = 20;
@@ -96,6 +79,26 @@ void Method::guiderBotMovement(){
 
 }
 
+void Method::FollowingRobotrun(){
+
+  scanData.Newdata(Update_Robot_Image_data());
+        
+  goal = scanData.findTurtlebot();
+
+  GPS.newGoal(goal, Current_Odom);
+  
+  if (GPS.goal_hit(Current_Odom)){
+    traj =GPS.reachGoal();
+    std::cout<< "accerlating" << std::endl;
+  }
+  else {
+    traj.linear.x = 0;
+    traj.angular.z = 0;
+    std::cout<< "brake" << std::endl;
+  }
+
+  Send_cmd_tb1(traj);
+}
 
 
 void Method::Send_cmd_tb1(geometry_msgs::Twist intructions){

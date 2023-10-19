@@ -10,10 +10,8 @@
  @brief This file contains the implementation of the DataProcessing class.
 */
 
-
 Movenment::Movenment(){
     default_velocity = 0.1;
-
 }
 
 void Movenment::newGoal(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose){
@@ -28,9 +26,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
     Deta_x = Goal.x-Current_Pose.pose.pose.position.x;
     Deta_y = Goal.y - Current_Pose.pose.pose.position.y;
 
-    
-    std::cout<< "deta_x" << std::endl;
-    std::cout<< Deta_x << std::endl;
+  
 
     DirectDistance = sqrt(std::pow(Deta_x,2) + std::pow(Deta_y,2));
     
