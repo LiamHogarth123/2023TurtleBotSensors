@@ -26,7 +26,9 @@ catkin_make
 ```bash
 roscore
 roslaunch turtlebot3_fake turtlebot3_fake.launch
+roslaunch turtlemulti turtleMulti.launch
 rosrun turtleboi turtleboi_method
+gz physics -s 0.01
 ```
 
 The code:

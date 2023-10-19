@@ -35,50 +35,44 @@ Method::Method(ros::NodeHandle nh) :
 
 
 
-  // Robot 2 leader ---------------------
+  // Robot 2 guider ---------------------
 
-  // sub5_ = nh_.subscribe("tb3_1/odom", 1000, &Method::odomCallback,this);
+  sub5_ = nh_.subscribe("tb3_1/odom", 1000, &Method::guiderOdomCallback,this);
 
-  // sub6_ = nh_.subscribe("tb3_1/scan", 10, &Method::LidaCallback,this);
-
-  // sub7_ = nh_.subscribe("tb3_1/camera/rgb/image_raw", 1000, &Method::RGBCallback, this);
-
-  // sub8_ = nh_.subscribe("tb3_0/camera/depth/image_raw", 1000, &Method::ImageDepthCallback, this);
-
-  // cmd_velocity_tb2 = nh.advertise<geometry_msgs::Twist>("tb3_1/cmd_vel",10);
+  cmd_velocity_tb2 = nh.advertise<geometry_msgs::Twist>("tb3_1/cmd_vel",10);
 
 
-  // Led1 = nh_.advertise<kobuki_msgs::DigitalOutput>("/mobile_base/commands/led1",10);
-
-  // service_ = nh_.advertiseService("/orange/mission", &Sample::request,this);
   
-};
+}
 
 void Method::seperateThread() {
-
-    bool toggle = false;
-    
-    std::thread myThread(&Method::threadForSensor, this);
-    while (toggle == true){
-      run();
-    }
-    while (toggle == false){
-      singleThread();
-      std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    }
-  
-  myThread.join();
-
+  while (true){
+    singleThread();
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  }
 }
 
 
+void Method::guiderBotMovement(){
+    
+        geometry_msgs::Twist test;
+        test.linear.x = 0.1;
+        test.linear.z = 0;
+        test.linear.y = 0;
+        test.angular.z = 0.1;
+        Send_cmd_tb2(test);
+
+}
 
 void Method::singleThread() {
 
   scanData.Newdata(Update_Robot_Image_data());
-  
+        
   goal = scanData.findTurtlebot();
 
+  GPS.newGoal(goal, Current_Odom);
+
+  geometry_msgs::Twist traj = GPS.reachGoal();
 
   goal_gobal_frame = adjustLaserData(goal, Current_Odom);
 
@@ -138,22 +132,19 @@ void Method:: threadForSensor(){
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
+
+  guiderBotMovement();
+    
 }
-
-
-
-
-
 
 
 void Method::Send_cmd_tb1(geometry_msgs::Twist intructions){
   cmd_velocity_tb1.publish(intructions);
 }
 
-// void Method::Send_cmd_tb2(geometry_msgs::Twist intructions){
-//   cmd_velocity_tb2.publish(intructions);
-
-// }
+void Method::Send_cmd_tb2(geometry_msgs::Twist intructions){
+  cmd_velocity_tb2.publish(intructions);
+}
 
 void Method::Brake(){
   geometry_msgs::Twist intructions;
@@ -191,6 +182,10 @@ void Method::ImageDepthCallback(const sensor_msgs::Image::ConstPtr& Msg){
   updated_imageDepth = *Msg;
 }
 
+void Method::guiderOdomCallback(const nav_msgs::Odometry::ConstPtr& odomMsg){
+  std::unique_lock<std::mutex> lck3 (odom_locker2);
+  guider_Odom = *odomMsg;
+}
 
 RobotData Method::Update_Robot_Image_data(){
   

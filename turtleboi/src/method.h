@@ -40,6 +40,7 @@ public:
   void LidaCallback(const sensor_msgs::LaserScan::ConstPtr& Msg);
   void RGBCallback(const sensor_msgs::Image::ConstPtr& Msg);
   void ImageDepthCallback(const sensor_msgs::Image::ConstPtr& Msg);
+  void guiderOdomCallback(const nav_msgs::Odometry::ConstPtr& odomMsg);
 
 
   RobotData Update_Robot_Image_data();
@@ -50,7 +51,7 @@ public:
 
   void Send_cmd_tb1(geometry_msgs::Twist intructions);
 
-  // void Send_cmd_tb2(geometry_msgs::Twist intructions);
+  void Send_cmd_tb2(geometry_msgs::Twist intructions);
 
   void  threadForSensor();
 
@@ -60,9 +61,12 @@ public:
 
   void run();
 
-  void singleThread();
+
 
   geometry_msgs::Point adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position);
+  void guiderBotMovement();
+
+  void singleThread();
 
 
   // Prameters for ROS
@@ -81,18 +85,17 @@ public:
 
 // Subscribers for turtlebot 2 (tb3_1)
   ros::Subscriber sub5_;
-  ros::Subscriber sub6_;
-  ros::Subscriber sub7_;
-  ros::Subscriber sub8_;
 
 //mutexs
   std::mutex odom_locker;
+  std::mutex odom_locker2;
   std::mutex RGB_locker;
   std::mutex Lida_locker;
   std::mutex ImageDepth_locker;
   std::mutex goal_lock;
 
   nav_msgs::Odometry Current_Odom;
+  nav_msgs::Odometry guider_Odom;
   sensor_msgs::Image updated_RGB;
   sensor_msgs::LaserScan updated_Lida;
   sensor_msgs::Image updated_imageDepth;
@@ -105,6 +108,7 @@ public:
 
 
   Movenment GPS;
+  Movenment GuiderGPS;
   Sensorprocessing scanData;
 };
 

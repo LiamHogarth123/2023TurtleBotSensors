@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/liam/git/2023TurtleBotSensors/turtleboi
+CMAKE_SOURCE_DIR = /home/dan/2023TurtleBotSensors/turtleboi
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/liam/git/2023TurtleBotSensors/turtleboi/build
+CMAKE_BINARY_DIR = /home/dan/2023TurtleBotSensors/turtleboi/build
 
 # Utility rule file for actionlib_msgs_generate_messages_nodejs.
 
@@ -67,6 +67,6 @@ CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/clean:
 .PHONY : CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/clean
 
 CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/depend:
-	cd /home/liam/git/2023TurtleBotSensors/turtleboi/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/liam/git/2023TurtleBotSensors/turtleboi /home/liam/git/2023TurtleBotSensors/turtleboi /home/liam/git/2023TurtleBotSensors/turtleboi/build /home/liam/git/2023TurtleBotSensors/turtleboi/build /home/liam/git/2023TurtleBotSensors/turtleboi/build/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dan/2023TurtleBotSensors/turtleboi/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dan/2023TurtleBotSensors/turtleboi /home/dan/2023TurtleBotSensors/turtleboi /home/dan/2023TurtleBotSensors/turtleboi/build /home/dan/2023TurtleBotSensors/turtleboi/build /home/dan/2023TurtleBotSensors/turtleboi/build/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/depend
 
