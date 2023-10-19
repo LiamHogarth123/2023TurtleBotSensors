@@ -49,16 +49,16 @@ geometry_msgs::Twist Movenment::reachGoal(){
     
 }
 
-bool Movenment::goal_hit(nav_msgs::Odometry temp_Current_Pose){
+bool Movenment::goal_hit(){
     double Deta_x = Goal.x-Current_Pose.pose.pose.position.x;
     double Deta_y = Goal.y - Current_Pose.pose.pose.position.y;
 
     double DirectDistance = sqrt(std::pow(Deta_x,2) + std::pow(Deta_y,2));
     std::cout << DirectDistance << std::endl;
     if (DirectDistance < 1){
-        return false;
+        return true;
     }
     else {
-        return true;
+        return false;
     }
 }

@@ -24,7 +24,7 @@ class Movenment
 
     geometry_msgs::Twist reachGoal();
 
-    bool goal_hit(nav_msgs::Odometry temp_Current_Pose);
+    bool goal_hit();
 
 
 
