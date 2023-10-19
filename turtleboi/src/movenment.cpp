@@ -12,6 +12,7 @@
 
 
 Movenment::Movenment(){
+    default_velocity = 0.1;
 
 }
 
@@ -24,9 +25,12 @@ geometry_msgs::Twist Movenment::reachGoal(){
     //do math to caclule the required linear and angular velocity to reach point
     geometry_msgs::Twist Directions;
 
-    Deta_x = Goal.x-Current_Pose.pose.pose.position.x+0.25;
-    Deta_y = Goal.y - Current_Pose.pose.pose.position.y+0.25;
+    Deta_x = Goal.x-Current_Pose.pose.pose.position.x;
+    Deta_y = Goal.y - Current_Pose.pose.pose.position.y;
 
+    
+    std::cout<< "deta_x" << std::endl;
+    std::cout<< Deta_x << std::endl;
 
     DirectDistance = sqrt(std::pow(Deta_x,2) + std::pow(Deta_y,2));
     
@@ -43,22 +47,33 @@ geometry_msgs::Twist Movenment::reachGoal(){
 
 
     Directions.linear.x = default_velocity;
-    Directions.angular.z = -default_velocity/2;
+    
+
+    if (Deta_x < 0){
+        Directions.angular.z = -default_velocity/radius;  
+    }
+    else {
+        Directions.angular.z = default_velocity/radius;
+    }
+
+
+
+   
     
     return Directions;
     
 }
 
-bool Movenment::goal_hit(){
+bool Movenment::goal_hit(nav_msgs::Odometry temp_Current_Pose){
     double Deta_x = Goal.x-Current_Pose.pose.pose.position.x;
     double Deta_y = Goal.y - Current_Pose.pose.pose.position.y;
 
     double DirectDistance = sqrt(std::pow(Deta_x,2) + std::pow(Deta_y,2));
     std::cout << DirectDistance << std::endl;
     if (DirectDistance < 1){
-        return true;
+        return false;
     }
     else {
-        return false;
+        return true;
     }
 }

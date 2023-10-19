@@ -24,7 +24,7 @@ class Movenment
 
     geometry_msgs::Twist reachGoal();
 
-    bool goal_hit();
+    bool goal_hit(nav_msgs::Odometry temp_Current_Pose);
 
 
 
@@ -42,7 +42,7 @@ class Movenment
     double Angle;
     double theta;
     double radius;
-
+    double default_velocity;
 
 
 };

@@ -63,11 +63,9 @@ void Method::singleThread() {
 
   geometry_msgs::Twist traj = GPS.reachGoal();
 
-  std::cout << traj.linear.x << std::endl;
-  std::cout << traj.angular.z << std::endl;
   Send_cmd_tb1(traj);
 
-  guiderBotMovement();
+  // guiderBotMovement();
     
 }
 
@@ -86,7 +84,7 @@ void Method::guiderBotMovement(){
 
   GuiderGPS.newGoal(guiderGoal, guider_Odom);
   geometry_msgs::Twist traj = GuiderGPS.reachGoal();
-  if (GuiderGPS.goal_hit()) {
+  if (GuiderGPS.goal_hit(guider_Odom)) {
     Brake();
     std::cout << "braking" << std::endl;
   }
