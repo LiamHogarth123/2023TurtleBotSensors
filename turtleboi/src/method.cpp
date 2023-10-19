@@ -55,17 +55,17 @@ void Method::seperateThread() {
 
 void Method::singleThread() {
 
-  // scanData.Newdata(Update_Robot_Image_data());
+  scanData.Newdata(Update_Robot_Image_data());
         
-  // goal = scanData.findTurtlebot();
+  goal = scanData.findTurtlebot();
 
-  // GPS.newGoal(goal, Current_Odom);
+  GPS.newGoal(goal, Current_Odom);
 
-  // geometry_msgs::Twist traj = GPS.reachGoal();
+  geometry_msgs::Twist traj = GPS.reachGoal();
 
-  // std::cout << traj.linear.x << std::endl;
-  // std::cout << traj.angular.z << std::endl;
-  // Send_cmd_tb1(traj);
+  std::cout << traj.linear.x << std::endl;
+  std::cout << traj.angular.z << std::endl;
+  Send_cmd_tb1(traj);
 
   guiderBotMovement();
     
@@ -161,3 +161,32 @@ RobotData Method::Update_Robot_Image_data(){
 
   return Image_data;
 }
+
+
+
+geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
+    geometry_msgs::Point adjustedValues;
+    
+    // Get the orientation from the odometry message
+    geometry_msgs::Quaternion orientation = Position.pose.pose.orientation;
+    
+    // Convert the quaternion to Euler angles (roll, pitch, yaw)
+    tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
+    double roll, pitch, yaw;
+    mat.getRPY(roll, pitch, yaw);
+    
+    // Perform the coordinate transformation
+    adjustedValues.x = laser_data.x * cos(yaw) - laser_data.y * sin(yaw);
+    adjustedValues.y = laser_data.x * sin(yaw) + laser_data.y * cos(yaw);
+    
+    // Add the position offset
+    adjustedValues.x += Position.pose.pose.position.x;
+    adjustedValues.y += Position.pose.pose.position.y;
+    
+    return adjustedValues;
+}
+
+// // To fix 
+// fix negtive sqitch of Movenment
+// fix check offset of turtlebot in Movenment
+// move back to sensor DATA
