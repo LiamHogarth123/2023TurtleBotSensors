@@ -37,7 +37,8 @@ geometry_msgs::Twist Movenment::reachGoal(){
     theta = M_PI - (2*((M_PI/2)-Angle));
 
     radius = (DirectDistance/sin(theta))*sin((M_PI/2)-Angle);
-  
+        std::cout << "radius" << std::endl;
+    std::cout << radius << std::endl;
 
     double default_velocity = 0.1;
 
