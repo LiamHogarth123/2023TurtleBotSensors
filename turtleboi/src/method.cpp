@@ -23,7 +23,7 @@ Method::Method(ros::NodeHandle nh) :
 
 
 
- GPS.change_stopping_distance(1);
+ GPS.change_stopping_distance(0.3);
  GuiderGPS.change_stopping_distance(0.25);
 
 // Robot 1 -----------------------------------------------------
@@ -70,7 +70,7 @@ void Method::singleThread() {
 
 void Method::multiThread(){
   
-  std::thread Lead_robot_thrad(guiderBotMovement());
+  //std::thread Lead_robot_thrad(guiderBotMovement());
   while (true){
     followingRobotRun();
   }
@@ -79,26 +79,33 @@ void Method::multiThread(){
 
 void Method::guiderBotMovement(){
   
-  if (Threading_switch){
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    for (int i = 0; i < Leader_goal.size(); i++){
+  // if (Threading_switch){
+  //   std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  //   for (int i = 0; i < Leader_goal.size(); i++){
       
-      guiderGoal = Leader_goal.at(i);
+  //     guiderGoal = Leader_goal.at(i);
 
-      GuiderGPS.newGoal(guiderGoal, guider_Odom);
-      geometry_msgs::Twist traj = GuiderGPS.reachGoal();
-      Send_cmd_tb2(traj);
-    }
-  }
-  else{
-    geometry_msgs::Point guiderGoal;
-    guiderGoal.x = 20;
-    guiderGoal.y = 20;
+  //     GuiderGPS.newGoal(guiderGoal, guider_Odom);
+  //     geometry_msgs::Twist traj = GuiderGPS.reachGoal();
+  //     Send_cmd_tb2(traj);
+  //   }
+  // }
+  // else{
+  //   geometry_msgs::Point guiderGoal;
+  //   guiderGoal.x = 20;
+  //   guiderGoal.y = 20;
 
-    GuiderGPS.newGoal(guiderGoal, guider_Odom);
-    geometry_msgs::Twist traj = GuiderGPS.reachGoal();
-    Send_cmd_tb2(traj);
-  }
+  //   GuiderGPS.newGoal(guiderGoal, guider_Odom);
+  //   geometry_msgs::Twist traj = GuiderGPS.reachGoal();
+  //   Send_cmd_tb2(traj);
+  // }
+
+  geometry_msgs::Twist test;
+        test.linear.x = 0.1;
+        test.linear.z = 0;
+        test.linear.y = 0;
+        test.angular.z = 0.1;
+        Send_cmd_tb2(test);
 
 }
 
@@ -106,7 +113,7 @@ void Method::followingRobotRun(){
 
   scanData.Newdata(Update_Robot_Image_data());
   goal = scanData.findTurtlebot();
-  goal = adjustLaserData(goal, Current_Odom);
+  //goal = adjustLaserData(goal, Current_Odom);
 
   GPS.newGoal(goal, Current_Odom);  
   
