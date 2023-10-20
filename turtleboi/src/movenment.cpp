@@ -12,6 +12,8 @@
 
 Movenment::Movenment(){
     default_velocity = 0.1;
+    distance_from_goal =0.5;
+
 }
 
 void Movenment::newGoal(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose){
@@ -31,6 +33,11 @@ geometry_msgs::Twist Movenment::reachGoal(){
     DirectDistance = sqrt(std::pow(Deta_x,2) + std::pow(Deta_y,2));
     
     Angle = atan2(Deta_y,Deta_x); // check this as x and y could be flipped
+    std::cout << "Angle" << std::endl;
+    std::cout << Angle << std::endl;
+
+    std::cout << "DirectDistance" << std::endl;
+    std::cout << DirectDistance << std::endl;
 
 
 
@@ -51,12 +58,9 @@ geometry_msgs::Twist Movenment::reachGoal(){
         std::cout << "braking" << std::endl;
     }
     else {
-        if (Deta_x < 0){
-            Directions.angular.z = -default_velocity/radius;  
-        }
-        else {
-            Directions.angular.z = default_velocity/radius;
-        }
+        
+        Directions.angular.z = -default_velocity/radius;
+        
     }
 
    
@@ -65,16 +69,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
     
 }
 
-// bool Movenment::goal_hit(nav_msgs::Odometry temp_Current_Pose){
-//     double Deta_x = Goal.x-Current_Pose.pose.pose.position.x;
-//     double Deta_y = Goal.y - Current_Pose.pose.pose.position.y;
+void Movenment::change_stopping_distance(double value){
+    distance_from_goal = value;
+}
 
-//     double DirectDistance = sqrt(std::pow(Deta_x,2) + std::pow(Deta_y,2));
-//     std::cout << DirectDistance << std::endl;
-//     if (DirectDistance < 1){
-//         return false;
-//     }
-//     else {
-//         return true;
-//     }
-// }

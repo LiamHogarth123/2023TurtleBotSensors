@@ -86,10 +86,11 @@ The method file will send this point from sensory data processing and the curren
 - Set up code structure cmake to work with ros(Done)
 - Set up ros callback and publisher systems (Done)
 - Set up main method loop (Basic draft done)
-- Set up test makergoal to see in sim 
-- Set up movenment calculations 
-- Set up image processing lida
-- Set up image processing RGB Colour and depth
+- Set up test makergoal to see in sim (Not Done but not nessarcy)
+- Set up movenment calculations (Done)
+- Set up image processing lida (Done)
+- Set up image processing RGB Colour and depth (no nessasary)
+- Fix Movenment caclulation to account for angle of turtlebot if needed. The adjust data may fix it already.
 
 
 

@@ -53,9 +53,7 @@ public:
 
   void Send_cmd_tb2(geometry_msgs::Twist intructions);
 
-  void  threadForSensor();
-
-  void Brake();
+  void threadForSensor();
 
   void seperateThread();
 
@@ -67,6 +65,8 @@ public:
   void guiderBotMovement();
 
   void singleThread();
+
+  void multiThread();
 
 
   // Prameters for ROS
@@ -94,22 +94,33 @@ public:
   std::mutex ImageDepth_locker;
   std::mutex goal_lock;
 
+//variables for callbacks
   nav_msgs::Odometry Current_Odom;
   nav_msgs::Odometry guider_Odom;
   sensor_msgs::Image updated_RGB;
   sensor_msgs::LaserScan updated_Lida;
   sensor_msgs::Image updated_imageDepth;
 
+//SensorData Object
   RobotData Image_data;
+
+//Geometry variable to do with movenment;
   geometry_msgs::Point goal;
   geometry_msgs::Point goal_gobal_frame;
   geometry_msgs::Twist traj;
+  geometry_msgs::Point guiderGoal;
 
 
 
+
+//Declaration of class objects
   Movenment GPS;
   Movenment GuiderGPS;
   Sensorprocessing scanData;
+
+  bool Threading_switch;
+  std::vector<geometry_msgs::Point> Leader_goal;
+
 };
 
   

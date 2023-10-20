@@ -19,7 +19,12 @@ Method::Method(ros::NodeHandle nh) :
 //Ros construction
 //Subscribing to TurtleBot3 ROS features
 
+ Threading_switch = false;
 
+
+
+ GPS.change_stopping_distance(1);
+ GuiderGPS.change_stopping_distance(0.25);
 
 // Robot 1 -----------------------------------------------------
   sub1_ = nh_.subscribe("tb3_0/odom", 1000, &Method::odomCallback,this);
@@ -46,9 +51,14 @@ Method::Method(ros::NodeHandle nh) :
 }
 
 void Method::seperateThread() {
-  while (true){
-    singleThread();
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  if (Threading_switch){
+    multiThread();
+  }
+  else{
+    while (true){
+      singleThread();
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    }
   }
 }
 
@@ -58,45 +68,50 @@ void Method::singleThread() {
   guiderBotMovement();
 }
 
+void Method::multiThread(){
+  
+  std::thread Lead_robot_thrad(guiderBotMovement());
+  while (true){
+    followingRobotRun();
+  }
+}
+
+
 void Method::guiderBotMovement(){
   
-  
-  geometry_msgs::Point guiderGoal;
-  guiderGoal.x = 20;
-  guiderGoal.y = 20;
+  if (Threading_switch){
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    for (int i = 0; i < Leader_goal.size(); i++){
+      
+      guiderGoal = Leader_goal.at(i);
 
-  GuiderGPS.newGoal(guiderGoal, guider_Odom);
-  geometry_msgs::Twist traj = GuiderGPS.reachGoal();
-  // if (GuiderGPS.goal_hit(guider_Odom)) {
-  //   Brake();
-  //   std::cout << "braking" << std::endl;
-  // }
-  // else {
-    std::cout << traj.linear.x << std::endl;
-    std::cout << traj.angular.z << std::endl;
+      GuiderGPS.newGoal(guiderGoal, guider_Odom);
+      geometry_msgs::Twist traj = GuiderGPS.reachGoal();
+      Send_cmd_tb2(traj);
+    }
+  }
+  else{
+    geometry_msgs::Point guiderGoal;
+    guiderGoal.x = 20;
+    guiderGoal.y = 20;
+
+    GuiderGPS.newGoal(guiderGoal, guider_Odom);
+    geometry_msgs::Twist traj = GuiderGPS.reachGoal();
     Send_cmd_tb2(traj);
-  //}
+  }
 
 }
 
 void Method::followingRobotRun(){
 
   scanData.Newdata(Update_Robot_Image_data());
-        
   goal = scanData.findTurtlebot();
+  goal = adjustLaserData(goal, Current_Odom);
 
-  GPS.newGoal(goal, Current_Odom);
+  GPS.newGoal(goal, Current_Odom);  
   
-  // if (GPS.goal_hit(Current_Odom)){
-    traj =GPS.reachGoal();
-  //   std::cout<< "accerlating" << std::endl;
-  // }
-  // else {
-  //   traj.linear.x = 0;
-  //   traj.angular.z = 0;
-  //   std::cout<< "brake" << std::endl;
-  // }
-
+  traj =GPS.reachGoal();
+  
   Send_cmd_tb1(traj);
 }
 
@@ -109,14 +124,6 @@ void Method::Send_cmd_tb2(geometry_msgs::Twist intructions){
   cmd_velocity_tb2.publish(intructions);
 }
 
-// void Method::Brake(){
-//   geometry_msgs::Twist intructions;
-//   intructions.linear.x = 0;
-//   intructions.linear.y = 0;
-//   intructions.linear.z = 0;
-//   intructions.angular.z = 0;
-//   cmd_velocity_tb2.publish(intructions);
-// }
 
 
 
@@ -166,25 +173,25 @@ RobotData Method::Update_Robot_Image_data(){
 
 
 geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
-    geometry_msgs::Point adjustedValues;
-    
-    // Get the orientation from the odometry message
-    geometry_msgs::Quaternion orientation = Position.pose.pose.orientation;
-    
-    // Convert the quaternion to Euler angles (roll, pitch, yaw)
-    tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
-    double roll, pitch, yaw;
-    mat.getRPY(roll, pitch, yaw);
-    
-    // Perform the coordinate transformation
-    adjustedValues.x = laser_data.x * cos(yaw) - laser_data.y * sin(yaw);
-    adjustedValues.y = laser_data.x * sin(yaw) + laser_data.y * cos(yaw);
-    
-    // Add the position offset
-    adjustedValues.x += Position.pose.pose.position.x;
-    adjustedValues.y += Position.pose.pose.position.y;
-    
-    return adjustedValues;
+  geometry_msgs::Point adjustedValues;
+  
+  // Get the orientation from the odometry message
+  geometry_msgs::Quaternion orientation = Position.pose.pose.orientation;
+  
+  // Convert the quaternion to Euler angles (roll, pitch, yaw)
+  tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
+  double roll, pitch, yaw;
+  mat.getRPY(roll, pitch, yaw);
+  
+  // Perform the coordinate transformation
+  adjustedValues.x = laser_data.x * cos(yaw) - laser_data.y * sin(yaw);
+  adjustedValues.y = laser_data.x * sin(yaw) + laser_data.y * cos(yaw);
+  
+  // Add the position offset
+  adjustedValues.x += Position.pose.pose.position.x;
+  adjustedValues.y += Position.pose.pose.position.y;
+  
+  return adjustedValues;
 }
 
 // // To fix 

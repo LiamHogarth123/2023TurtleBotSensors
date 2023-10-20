@@ -26,6 +26,8 @@ class Movenment
 
     bool goal_hit(nav_msgs::Odometry temp_Current_Pose);
 
+    void change_stopping_distance(double value);
+
 
 
 
@@ -43,6 +45,7 @@ class Movenment
     double theta;
     double radius;
     double default_velocity;
+    double distance_from_goal;
 
 
 };
