@@ -23,12 +23,13 @@ class Movenment
     void newGoal(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose );
 
     geometry_msgs::Twist reachGoal();
+    geometry_msgs::Twist guiderReachGoal();
 
     bool goal_hit(nav_msgs::Odometry temp_Current_Pose);
 
     void change_stopping_distance(double value);
 
-
+    double calculateAngularVelocity();
 
 
 
@@ -38,8 +39,6 @@ class Movenment
     nav_msgs::Odometry Current_Pose;
 
     //Calculation variable declaration
-    double Deta_x;
-    double Deta_y;
     double DirectDistance;
     double Angle;
     double theta;

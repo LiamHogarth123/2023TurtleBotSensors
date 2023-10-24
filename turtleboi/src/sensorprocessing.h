@@ -20,7 +20,7 @@ public:
    */
   Sensorprocessing();
 
-  geometry_msgs::Point CalculateMidPoint();
+  // geometry_msgs::Point CalculateMidPoint();
 
   void Newdata(RobotData temp_data);
 

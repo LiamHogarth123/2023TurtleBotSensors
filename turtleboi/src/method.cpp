@@ -24,7 +24,7 @@ Method::Method(ros::NodeHandle nh) :
 
 
  GPS.change_stopping_distance(0.3);
- GuiderGPS.change_stopping_distance(0.25);
+ GuiderGPS.change_stopping_distance(0.1);
 
 // Robot 1 -----------------------------------------------------
   sub1_ = nh_.subscribe("tb3_0/odom", 1000, &Method::odomCallback,this);
@@ -100,12 +100,20 @@ void Method::guiderBotMovement(){
   //   Send_cmd_tb2(traj);
   // }
 
-  geometry_msgs::Twist test;
-        test.linear.x = 0.1;
-        test.linear.z = 0;
-        test.linear.y = 0;
-        test.angular.z = 0.1;
-        Send_cmd_tb2(test);
+  // geometry_msgs::Twist test;
+  //       test.linear.x = 0.1;
+  //       test.linear.z = 0;
+  //       test.linear.y = 0;
+  //       test.angular.z = 0.1;
+  //       Send_cmd_tb2(test);
+
+  geometry_msgs::Point guiderGoal;
+  guiderGoal.x = 10;
+  guiderGoal.y = 10;
+
+  GuiderGPS.newGoal(guiderGoal, guider_Odom);
+  geometry_msgs::Twist guiderTraj = GuiderGPS.guiderReachGoal();
+  Send_cmd_tb2(guiderTraj);
 
 }
 
@@ -117,7 +125,7 @@ void Method::followingRobotRun(){
 
   GPS.newGoal(goal, Current_Odom);  
   
-  traj =GPS.reachGoal();
+  traj = GPS.reachGoal();
   
   Send_cmd_tb1(traj);
 }
