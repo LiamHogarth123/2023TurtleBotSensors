@@ -57,7 +57,7 @@ void Method::seperateThread() {
   else{
     while (true){
       singleThread();
-      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
   }
 }
@@ -108,8 +108,8 @@ void Method::guiderBotMovement(){
   //       Send_cmd_tb2(test);
 
   geometry_msgs::Point guiderGoal;
-  guiderGoal.x = 10;
-  guiderGoal.y = 10;
+  guiderGoal.x = 5;
+  guiderGoal.y = 5;
 
   GuiderGPS.newGoal(guiderGoal, guider_Odom);
   geometry_msgs::Twist guiderTraj = GuiderGPS.guiderReachGoal();

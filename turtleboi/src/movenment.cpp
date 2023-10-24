@@ -31,7 +31,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
     Angle = atan2(Goal.y,Goal.x); // check this as x and y could be flipped
     //std::cout << "Angle " << Angle << std::endl;
 
-    //std::cout << "DirectDistance: " << DirectDistance << std::endl;
+    std::cout << "followerDirectDistance: " << DirectDistance << std::endl;
 
 
 
@@ -73,19 +73,14 @@ geometry_msgs::Twist Movenment::reachGoal(){
         Directions.angular.z = 0;
         //std::cout << "here4" << std::endl;
     }
-
-
-   
     
     return Directions;
     
 }
 
 geometry_msgs::Twist Movenment::guiderReachGoal() {
-    
-    //geometry_msgs::Twist Directions; 
 
-    double LINEAR_SPEED = 0.2;
+    double LINEAR_SPEED = 0.15;
 
     double delta_x = Goal.x - Current_Pose.pose.pose.position.x;
     double delta_y = Goal.y - Current_Pose.pose.pose.position.y;
@@ -114,24 +109,14 @@ geometry_msgs::Twist Movenment::guiderReachGoal() {
         Directions.angular.z = 0;
         std::cout << "braking" << std::endl;
     }
-    // else if (DirectDistance > LINEAR_SPEED) {
-    //     Directions.linear.x = LINEAR_SPEED;
-    // } else {
-    //     Directions.linear.x = DirectDistance;
-    // }
 
-
-    
     return Directions;
-}
-
-void Movenment::change_stopping_distance(double value){
-    distance_from_goal = value;
 }
 
 // Function to calculate the required angular velocity to reach the goal
 double Movenment::calculateAngularVelocity() {
     double ANGULAR_SPEED = 1;
+    double ANGULAR_DEAD_ZONE = 0.1; // to help prevent wobbling due to angle changes
 
     tf::Quaternion current_orientation;
 
@@ -153,10 +138,16 @@ double Movenment::calculateAngularVelocity() {
     double angle = atan2(goal_vector.y(), goal_vector.x()) - atan2(heading_vector.y(), heading_vector.x());
 
     // Adjust the angular velocity based on the relative angle
-    if (angle > 0) {
+    if (fabs(angle) < ANGULAR_DEAD_ZONE) {
+        return 0.0;
+    } else if (angle > 0) {
         return ANGULAR_SPEED;
     } else {
         return -ANGULAR_SPEED;
     }
     
+}
+
+void Movenment::change_stopping_distance(double value){
+    distance_from_goal = value;
 }
