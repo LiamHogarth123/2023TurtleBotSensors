@@ -132,25 +132,31 @@ void Movenment::change_stopping_distance(double value){
 // Function to calculate the required angular velocity to reach the goal
 double Movenment::calculateAngularVelocity() {
     double ANGULAR_SPEED = 1;
-    
-    geometry_msgs::Quaternion current_orientation = Current_Pose.pose.pose.orientation;
 
-    tf::Quaternion current_quaternion;
-        // Normalize the quaternion
-    current_quaternion.normalize();
-    tf::quaternionMsgToTF(current_orientation, current_quaternion);
+    tf::Quaternion current_orientation;
 
+    tf::quaternionMsgToTF(Current_Pose.pose.pose.orientation, current_orientation);
 
+    // Normalize the quaternion
+    current_orientation.normalize();
 
+    // Calculate the heading direction vector
+    tf::Vector3 heading_vector(1, 0, 0);  // Assumes the robot's heading direction is along the x-axis
+
+    // Rotate the heading vector to the current orientation
+    heading_vector = tf::quatRotate(current_orientation, heading_vector);
+
+    // Calculate the vector to the goal
     tf::Vector3 goal_vector(Goal.x - Current_Pose.pose.pose.position.x, Goal.y - Current_Pose.pose.pose.position.y, 0);
 
-    // Calculate the relative yaw angle between the current orientation and the goal vector
-    double yaw_angle = tf::getYaw(current_quaternion.inverse() * goal_vector);
+    // Calculate the angle between the heading direction and the goal vector
+    double angle = atan2(goal_vector.y(), goal_vector.x()) - atan2(heading_vector.y(), heading_vector.x());
 
     // Adjust the angular velocity based on the relative angle
-    if (yaw_angle > 0) {
+    if (angle > 0) {
         return ANGULAR_SPEED;
     } else {
         return -ANGULAR_SPEED;
     }
+    
 }

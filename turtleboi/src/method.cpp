@@ -23,7 +23,7 @@ Method::Method(ros::NodeHandle nh) :
 
 
 
- GPS.change_stopping_distance(0.3);
+ GPS.change_stopping_distance(0.5);
  GuiderGPS.change_stopping_distance(0.1);
 
 // Robot 1 -----------------------------------------------------
