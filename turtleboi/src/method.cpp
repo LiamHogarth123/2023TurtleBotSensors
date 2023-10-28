@@ -9,6 +9,10 @@
 // #include <kobuki_msgs/DigitalOutput.h>
 #include "ros/ros.h"
 
+#include <fstream>
+
+
+
 using std::cout;
 using std::endl;
 
@@ -20,11 +24,14 @@ Method::Method(ros::NodeHandle nh) :
 //Subscribing to TurtleBot3 ROS features
 
  Threading_switch = false;
+ debuggingMode = false;
+ telop_mode = false;
 
 
 
  GPS.change_stopping_distance(0.5);
  GuiderGPS.change_stopping_distance(0.1);
+ goal_index = 0;
 
 // Robot 1 -----------------------------------------------------
   sub1_ = nh_.subscribe("tb3_0/odom", 1000, &Method::odomCallback,this);
@@ -37,9 +44,6 @@ Method::Method(ros::NodeHandle nh) :
 
   cmd_velocity_tb1 = nh_.advertise<geometry_msgs::Twist>("tb3_0/cmd_vel",10);
 
-
-
-
   // Robot 2 guider ---------------------
 
   sub5_ = nh_.subscribe("tb3_1/odom", 1000, &Method::guiderOdomCallback,this);
@@ -51,8 +55,64 @@ Method::Method(ros::NodeHandle nh) :
 }
 
 void Method::seperateThread() {
+  //User input
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  std::string userInput;
+  std::cout << "Please enter control method"<< std::endl;
+  std::cout << "1. use provide goals"<< std::endl;
+  std::cout << "2. provide a goal"<< std::endl;
+  std::cout << "3. control the guider robot with user input"<< std::endl;
+  std::cin >> userInput;
+  int input_int = std::stoi(userInput);
+
+  switch (input_int) {
+    case 1: {
+      readGoal();
+      break;
+      }
+    case 2:{
+      Leader_goals.clear();
+      geometry_msgs::Point temp;
+      std::cout << "enter x"<< std::endl;
+      std::cin >> userInput;
+      temp.x = std::stoi(userInput);
+      std::cout << "enter y"<< std::endl;
+      std::cin >> userInput;
+      temp.y = std::stoi(userInput);
+      Leader_goals.push_back(temp);
+      break;
+      }
+    case 3:{
+      telop_mode = true;
+      break;
+      }
+    default:{
+    std::cout << "invalid input - therefore using default goals"<< std::endl;
+    }
+  }
+
+  std::cout << "Would you like to use multiThreading for each turtlebot: (y/n)" << std::endl;
+
+  std::cin >> userInput;
+
+  if (userInput == "y"){
+    Threading_switch = true;
+  }
+
+
+
+  //Code start
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
   if (Threading_switch){
     multiThread();
+  }
+  else if(telop_mode){
+    std::thread Lead_robot_thread(&Method::followingRobotThread, this);
+    // std::thread guidingRobotDrive(&Method::telopDrive, this);
+    telop();
+
+
   }
   else{
     while (true){
@@ -63,58 +123,60 @@ void Method::seperateThread() {
 }
 
 
+//threading switching
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 void Method::singleThread() {
   followingRobotRun();
   guiderBotMovement();
 }
 
-void Method::multiThread(){
-  
-  //std::thread Lead_robot_thrad(guiderBotMovement());
+void Method::multiThread(){  
+  std::thread Lead_robot_thread(&Method::guiderBotMovement, this);
   while (true){
     followingRobotRun();
   }
 }
 
+void Method::followingRobotThread(){
+  while(true){
+    followingRobotRun();
+  }
+}
 
+
+//Movenment control for both 
+///////////////////////////////////////////////////////////////////////////////////////////
 void Method::guiderBotMovement(){
   
-  // if (Threading_switch){
-  //   std::this_thread::sleep_for(std::chrono::milliseconds(500));
-  //   for (int i = 0; i < Leader_goal.size(); i++){
+  if (Threading_switch){
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    for (int i = 0; i < Leader_goals.size(); i++){
       
-  //     guiderGoal = Leader_goal.at(i);
+      guiderGoal = Leader_goals.at(i);
 
-  //     GuiderGPS.newGoal(guiderGoal, guider_Odom);
-  //     geometry_msgs::Twist traj = GuiderGPS.reachGoal();
-  //     Send_cmd_tb2(traj);
-  //   }
-  // }
-  // else{
-  //   geometry_msgs::Point guiderGoal;
-  //   guiderGoal.x = 20;
-  //   guiderGoal.y = 20;
+      GuiderGPS.newGoal(guiderGoal, guider_Odom);
+      geometry_msgs::Twist traj = GuiderGPS.reachGoal();
+      Send_cmd_tb2(traj);
+    }
+  }
+  else{
 
-  //   GuiderGPS.newGoal(guiderGoal, guider_Odom);
-  //   geometry_msgs::Twist traj = GuiderGPS.reachGoal();
-  //   Send_cmd_tb2(traj);
-  // }
+    // std::cout<< "guiderbotopening" << std::endl;
+    geometry_msgs::Point guiderGoal;
 
-  // geometry_msgs::Twist test;
-  //       test.linear.x = 0.1;
-  //       test.linear.z = 0;
-  //       test.linear.y = 0;
-  //       test.angular.z = 0.1;
-  //       Send_cmd_tb2(test);
+    guiderGoal = Leader_goals.at(goal_index);
+   
 
-  geometry_msgs::Point guiderGoal;
-  guiderGoal.x = 5;
-  guiderGoal.y = 5;
-
-  GuiderGPS.newGoal(guiderGoal, guider_Odom);
-  geometry_msgs::Twist guiderTraj = GuiderGPS.guiderReachGoal();
-  Send_cmd_tb2(guiderTraj);
-
+    GuiderGPS.newGoal(guiderGoal, guider_Odom);
+    geometry_msgs::Twist guiderTraj = GuiderGPS.guiderReachGoal();
+    Send_cmd_tb2(guiderTraj);
+    if (GuiderGPS.goal_hit(guiderGoal, guider_Odom)){
+      if (goal_index != Leader_goals.size()){
+         goal_index++;
+      }
+    }
+  }
 }
 
 void Method::followingRobotRun(){
@@ -131,6 +193,8 @@ void Method::followingRobotRun(){
 }
 
 
+// Publishing functions 
+///////////////////////////////////////////////////////////////////////////////////////////
 void Method::Send_cmd_tb1(geometry_msgs::Twist intructions){
   cmd_velocity_tb1.publish(intructions);
 }
@@ -138,8 +202,6 @@ void Method::Send_cmd_tb1(geometry_msgs::Twist intructions){
 void Method::Send_cmd_tb2(geometry_msgs::Twist intructions){
   cmd_velocity_tb2.publish(intructions);
 }
-
-
 
 
 
@@ -186,7 +248,8 @@ RobotData Method::Update_Robot_Image_data(){
 }
 
 
-
+//data Adjustement function
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
   geometry_msgs::Point adjustedValues;
   
@@ -209,7 +272,121 @@ geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, na
   return adjustedValues;
 }
 
-// // To fix 
-// fix negtive sqitch of Movenment
-// fix check offset of turtlebot in Movenment
-// move back to sensor DATA
+// Read/Load goals
+//////////////////////////////////////////////////////////////////////
+bool Method::readGoal() {
+    // Define the filename of the text file you want to read
+    // std::string filename = "../data/Goals.TXT";
+
+
+    std::string path = ros::package::getPath("turtleboi");
+    path += "/data/"; //Looking at data subfolder
+    std::string default_filename = path + "Goals.TXT";
+
+    std::string filename;
+    
+    nh_.param<std::string>("goals", filename, default_filename);
+
+
+    // Open the file for reading
+    std::ifstream file(filename, std::ios::in);
+
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file: " << filename << std::endl;
+        if (file.fail()) {
+            std::cerr << "Error code: " << file.rdstate() << std::endl;
+        }
+        return false; // Return an error code
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        std::istringstream lineStream(line);
+        geometry_msgs::Point point;
+        if (lineStream >> point.x >> point.y >> point.z) {
+          Leader_goals.push_back(point);
+        }
+        
+        else {
+          std::cerr << "Error parsing line: " << line << std::endl;    
+        }
+    }
+
+    file.close();
+
+    for (const auto& point : Leader_goals) {
+        std::cout << "Point: (" << point.x << ", " << point.y << ", " << point.z << ")\n";
+    }
+
+    return true; 
+}
+
+
+
+//Telelop functions
+/////////////////////////////////////////////////
+void Method::telop(){
+  
+  
+  cout << "You will be able to control" << endl;
+  cout << "Speed via i/k." << endl;
+  cout << "Steering via j/l." << endl;
+  cout << "Emergency stop is o" << endl;
+  cout << "Exit is ." << endl;
+
+
+  double brake=0,steering=0,throttle=0;
+  geometry_msgs::Twist intructions;
+  
+  char c;
+  bool run=true;
+  // Set the terminal to raw mode
+  while(run) {
+    system("stty raw");
+    c = getchar(); 
+    // terminate when "." is pressed
+    system("stty cooked");
+    system("clear");
+    std::cout << c << " was pressed."<< std::endl;
+    switch(c){
+      case '.' :
+          system("stty cooked");
+          run=0;
+          break;
+      case 'i' :
+          intructions.linear.x = 0;
+          break;
+      case 'k' :
+          intructions.linear.x = 0;
+          break;
+      case 'o' :
+          intructions.linear.x = 0;
+          intructions.angular.z = 0;
+          break;                
+      case 'j' :
+          intructions.angular.z =- 0.05;
+          break;
+      case 'l' :
+          intructions.angular.z =+ 0.05;
+          break;
+      default:
+          break;
+    }
+
+
+    if(run){
+      Send_cmd_tb2(intructions);
+      std::this_thread::sleep_for (std::chrono::milliseconds(50));
+    }
+  }
+}
+
+void Method::telopDrive(void){
+    
+    while(true){    
+      std::this_thread::sleep_for (std::chrono::milliseconds(50));
+    }
+
+}
+
+

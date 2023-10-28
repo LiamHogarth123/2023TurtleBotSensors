@@ -31,6 +31,8 @@ class Movenment
 
     double calculateAngularVelocity();
 
+    bool goal_hit(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose);
+
 
 
     //parameters

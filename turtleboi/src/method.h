@@ -19,6 +19,8 @@
 #include "sensorprocessing.h"
 #include "movenment.h"
 
+#include <ros/package.h>
+
 
 
 
@@ -42,7 +44,6 @@ public:
   void ImageDepthCallback(const sensor_msgs::Image::ConstPtr& Msg);
   void guiderOdomCallback(const nav_msgs::Odometry::ConstPtr& odomMsg);
 
-
   RobotData Update_Robot_Image_data();
 
 
@@ -59,6 +60,8 @@ public:
 
   void followingRobotRun();
 
+  bool readGoal();
+
 
 
   geometry_msgs::Point adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position);
@@ -67,6 +70,12 @@ public:
   void singleThread();
 
   void multiThread();
+
+  void telop();
+
+  void telopDrive(void);
+  
+  void followingRobotThread();
 
 
   // Prameters for ROS
@@ -110,6 +119,8 @@ public:
   geometry_msgs::Twist traj;
   geometry_msgs::Point guiderGoal;
 
+  double goal_index;
+
 
 
 
@@ -119,7 +130,10 @@ public:
   Sensorprocessing scanData;
 
   bool Threading_switch;
-  std::vector<geometry_msgs::Point> Leader_goal;
+  std::vector<geometry_msgs::Point> Leader_goals;
+
+  bool debuggingMode;
+  bool telop_mode;
 
 };
 

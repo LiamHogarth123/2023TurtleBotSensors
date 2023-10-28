@@ -31,7 +31,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
     Angle = atan2(Goal.y,Goal.x); // check this as x and y could be flipped
     //std::cout << "Angle " << Angle << std::endl;
 
-    std::cout << "followerDirectDistance: " << DirectDistance << std::endl;
+    // std::cout << "followerDirectDistance: " << DirectDistance << std::endl;
 
 
 
@@ -50,7 +50,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
     if (DirectDistance < distance_from_goal && DirectDistance > 0) {
         Directions.linear.x = 0;
         Directions.angular.z = 0;
-        std::cout << "braking" << std::endl;
+        // std::cout << "braking" << std::endl;
     }
     // for rotating the bot if it cant find turtlebot
     else if (DirectDistance == 0) {
@@ -85,15 +85,15 @@ geometry_msgs::Twist Movenment::guiderReachGoal() {
     double delta_x = Goal.x - Current_Pose.pose.pose.position.x;
     double delta_y = Goal.y - Current_Pose.pose.pose.position.y;
 
-    std::cout << "Goalx: " << Goal.x << std::endl;
-    std::cout << "Goaly: " << Goal.y << std::endl;
-    std::cout << "x: " << Current_Pose.pose.pose.position.x << std::endl;
-    std::cout << "y: " << Current_Pose.pose.pose.position.y << std::endl;
-    std::cout << "dx: " << delta_x << std::endl;
-    std::cout << "dy: " << delta_y << std::endl;
+    // std::cout << "Goalx: " << Goal.x << std::endl;
+    // std::cout << "Goaly: " << Goal.y << std::endl;
+    // std::cout << "x: " << Current_Pose.pose.pose.position.x << std::endl;
+    // std::cout << "y: " << Current_Pose.pose.pose.position.y << std::endl;
+    // std::cout << "dx: " << delta_x << std::endl;
+    // std::cout << "dy: " << delta_y << std::endl;
 
     DirectDistance = sqrt(std::pow(delta_x,2) + std::pow(delta_y,2));
-    std::cout << "DirectDistance: " << DirectDistance << std::endl;
+    // std::cout << "DirectDistance: " << DirectDistance << std::endl;
 
     // Calculate the angular velocity
     double angular_velocity = calculateAngularVelocity();
@@ -107,11 +107,24 @@ geometry_msgs::Twist Movenment::guiderReachGoal() {
     if (DirectDistance <= distance_from_goal) {
         Directions.linear.x = 0;
         Directions.angular.z = 0;
-        std::cout << "braking" << std::endl;
+        // std::cout << "braking" << std::endl;
     }
 
     return Directions;
 }
+
+bool Movenment::goal_hit(geometry_msgs::Point temp_goal, nav_msgs::Odometry temp_Current_Pose){
+    double delta_x = Goal.x - Current_Pose.pose.pose.position.x;
+    double delta_y = Goal.y - Current_Pose.pose.pose.position.y;
+    DirectDistance = sqrt(std::pow(delta_x,2) + std::pow(delta_y,2));
+    if (DirectDistance <= distance_from_goal) {
+        return true;
+    }
+    else{
+        return false;
+    }
+} 
+
 
 // Function to calculate the required angular velocity to reach the goal
 double Movenment::calculateAngularVelocity() {
