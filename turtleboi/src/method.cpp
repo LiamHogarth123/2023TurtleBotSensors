@@ -67,7 +67,12 @@ void Method::seperateThread() {
 
   switch (input_int) {
     case 1: {
-      readGoal();
+
+      std::cout << "Please input environment type (h = house, e = empty)"<< std::endl;
+      std::cin >> userInput;
+      if (userInput == "h"){
+        default_goals = true;
+        }
       break;
       }
     case 2:{
@@ -86,18 +91,43 @@ void Method::seperateThread() {
       telop_mode = true;
       break;
       }
+    case 4:{
+      std::cout <<"Super Secret debugging bog" << std::endl;
+      scanData.Newdata(Update_Robot_Image_data());
+      scanData.PrintLaserSpec();
+      break;
+    }
     default:{
     std::cout << "invalid input - therefore using default goals"<< std::endl;
     }
   }
 
-  std::cout << "Would you like to use multiThreading for each turtlebot: (y/n)" << std::endl;
+  // std::cout << "Would you like to use multiThreading for each turtlebot: (y/n)" << std::endl;
 
+  // std::cin >> userInput;
+
+  // if (userInput == "y"){
+  //   Threading_switch = true;
+  // }
+
+
+
+  std::cout << "Please input environment type (h = house, e = empty)"<< std::endl;
   std::cin >> userInput;
-
-  if (userInput == "y"){
-    Threading_switch = true;
+  if (userInput == "h"){
+    house = true;
+    if (default_goals){
+      readGoal(true);
+    }
   }
+  else {
+    house = false;
+    if (default_goals){
+      readGoal(false);
+    }
+  }
+
+
 
 
 
@@ -108,16 +138,16 @@ void Method::seperateThread() {
     multiThread();
   }
   else if(telop_mode){
-    std::thread Lead_robot_thread(&Method::followingRobotThread, this);
-    // std::thread guidingRobotDrive(&Method::telopDrive, this);
-    telop();
-
+    while (true){
+      followingRobotRun();
+      std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    }
 
   }
   else{
     while (true){
       singleThread();
-      std::this_thread::sleep_for(std::chrono::milliseconds(300));
+      std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
   }
 }
@@ -180,15 +210,27 @@ void Method::guiderBotMovement(){
 }
 
 void Method::followingRobotRun(){
+        
 
   scanData.Newdata(Update_Robot_Image_data());
-  goal = scanData.findTurtlebot();
-  //goal = adjustLaserData(goal, Current_Odom);
+
+  
+  if (house){
+    std::vector<geometry_msgs::Point> NewPoints;
+    NewPoints = scanData.findAllLaserPoints();
+    NewPoints = adjustLaserDataVector(NewPoints, Current_Odom);
+
+    goal = motion_dection(current_map, NewPoints);
+    goal = global_To_local(goal, Current_Odom);
+
+    current_map = NewPoints;
+  }
+  else {
+    goal = scanData.findTurtlebotworld();
+  }
 
   GPS.newGoal(goal, Current_Odom);  
-  
   traj = GPS.reachGoal();
-  
   Send_cmd_tb1(traj);
 }
 
@@ -248,44 +290,29 @@ RobotData Method::Update_Robot_Image_data(){
 }
 
 
-//data Adjustement function
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
-  geometry_msgs::Point adjustedValues;
-  
-  // Get the orientation from the odometry message
-  geometry_msgs::Quaternion orientation = Position.pose.pose.orientation;
-  
-  // Convert the quaternion to Euler angles (roll, pitch, yaw)
-  tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
-  double roll, pitch, yaw;
-  mat.getRPY(roll, pitch, yaw);
-  
-  // Perform the coordinate transformation
-  adjustedValues.x = laser_data.x * cos(yaw) - laser_data.y * sin(yaw);
-  adjustedValues.y = laser_data.x * sin(yaw) + laser_data.y * cos(yaw);
-  
-  // Add the position offset
-  adjustedValues.x += Position.pose.pose.position.x;
-  adjustedValues.y += Position.pose.pose.position.y;
-  
-  return adjustedValues;
-}
+
 
 // Read/Load goals
 //////////////////////////////////////////////////////////////////////
-bool Method::readGoal() {
+bool Method::readGoal(bool house) {
     // Define the filename of the text file you want to read
     // std::string filename = "../data/Goals.TXT";
-
-
-    std::string path = ros::package::getPath("turtleboi");
-    path += "/data/"; //Looking at data subfolder
-    std::string default_filename = path + "Goals.TXT";
-
     std::string filename;
+    std::string default_filename;
+    std::string path;
     
-    nh_.param<std::string>("goals", filename, default_filename);
+    if (house){
+      path = ros::package::getPath("turtleboi");
+      path += "/data/"; //Looking at data subfolder
+      default_filename = path + "House.TXT";
+      nh_.param<std::string>("goals", filename, default_filename);
+    }
+    else {
+      path = ros::package::getPath("turtleboi");
+      path += "/data/"; //Looking at data subfolder
+      default_filename = path + "Goals.TXT";
+      nh_.param<std::string>("goals", filename, default_filename);
+    }
 
 
     // Open the file for reading
@@ -322,71 +349,116 @@ bool Method::readGoal() {
 }
 
 
-
-//Telelop functions
-/////////////////////////////////////////////////
-void Method::telop(){
+//data Adjustement function
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
+  geometry_msgs::Point adjustedValues;
   
+  // Get the orientation from the odometry message
+  geometry_msgs::Quaternion orientation = Position.pose.pose.orientation;
   
-  cout << "You will be able to control" << endl;
-  cout << "Speed via i/k." << endl;
-  cout << "Steering via j/l." << endl;
-  cout << "Emergency stop is o" << endl;
-  cout << "Exit is ." << endl;
-
-
-  double brake=0,steering=0,throttle=0;
-  geometry_msgs::Twist intructions;
+  // Convert the quaternion to Euler angles (roll, pitch, yaw)
+  tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
+  double roll, pitch, yaw;
+  mat.getRPY(roll, pitch, yaw);
   
-  char c;
-  bool run=true;
-  // Set the terminal to raw mode
-  while(run) {
-    system("stty raw");
-    c = getchar(); 
-    // terminate when "." is pressed
-    system("stty cooked");
-    system("clear");
-    std::cout << c << " was pressed."<< std::endl;
-    switch(c){
-      case '.' :
-          system("stty cooked");
-          run=0;
-          break;
-      case 'i' :
-          intructions.linear.x = 0;
-          break;
-      case 'k' :
-          intructions.linear.x = 0;
-          break;
-      case 'o' :
-          intructions.linear.x = 0;
-          intructions.angular.z = 0;
-          break;                
-      case 'j' :
-          intructions.angular.z =- 0.05;
-          break;
-      case 'l' :
-          intructions.angular.z =+ 0.05;
-          break;
-      default:
-          break;
-    }
+  // Perform the coordinate transformation
+  adjustedValues.x = laser_data.x * cos(yaw) - laser_data.y * sin(yaw);
+  adjustedValues.y = laser_data.x * sin(yaw) + laser_data.y * cos(yaw);
+  
+  // Add the position offset
+  adjustedValues.x += Position.pose.pose.position.x;
+  adjustedValues.y += Position.pose.pose.position.y;
+  
+  return adjustedValues;
+}
 
 
-    if(run){
-      Send_cmd_tb2(intructions);
-      std::this_thread::sleep_for (std::chrono::milliseconds(50));
+std::vector<geometry_msgs::Point> Method::adjustLaserDataVector(std::vector<geometry_msgs::Point> laser_data, nav_msgs::Odometry Position) {
+  std::vector<geometry_msgs::Point> adjustedValues;
+  geometry_msgs::Point temp;
+  
+   // Get the orientation from the odometry message
+  geometry_msgs::Quaternion orientation = Position.pose.pose.orientation;
+  
+  // Convert the quaternion to Euler angles (roll, pitch, yaw)
+  tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
+  double roll, pitch, yaw;
+  mat.getRPY(roll, pitch, yaw);
+
+  for (int i = 0; i < laser_data.size(); i++){
+    // Perform the coordinate transformation
+    temp.x = laser_data.at(i).x * cos(yaw) - laser_data.at(i).y * sin(yaw);
+    temp.y = laser_data.at(i).x * sin(yaw) + laser_data.at(i).y * cos(yaw);
+    // Add the position offset
+    temp.x += Position.pose.pose.position.x;
+    temp.y += Position.pose.pose.position.y;
+    adjustedValues.push_back(temp);
+  }
+  return adjustedValues;
+}
+
+
+geometry_msgs::Point Method::global_To_local(geometry_msgs::Point globalPoint, nav_msgs::Odometry robotPose) {
+    // Extract the robot's orientation (Quaternion) from robotPose
+  geometry_msgs::Quaternion orientation = robotPose.pose.pose.orientation;
+
+  // Convert the quaternion to Euler angles (roll, pitch, yaw)
+  tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
+  double roll, pitch, yaw;
+  mat.getRPY(roll, pitch, yaw);
+
+  // Perform the coordinate transformation to move the point back to the original local frame
+  double rotatedX = globalPoint.x * cos(yaw) - globalPoint.y * sin(yaw);
+  double rotatedY = globalPoint.x * sin(yaw) + globalPoint.y * cos(yaw);
+
+  // Add the position offset to move the point back to the local frame
+  double localX = rotatedX + robotPose.pose.pose.position.x;
+  double localY = rotatedY + robotPose.pose.pose.position.y;
+
+  geometry_msgs::Point localPoint;
+  localPoint.x = localX;
+  localPoint.y = localY;
+
+  return localPoint;
+}
+
+
+
+geometry_msgs::Point Method::motion_dection(std::vector<geometry_msgs::Point> old_points, std::vector<geometry_msgs::Point> newPoints){
+  geometry_msgs::Point Motion_point;
+  double movementThreshold = 0.01;
+  for (const auto& newPoint : newPoints) {
+    bool pointMatched = false;
+    for (auto& oldPoint : old_points) {
+        if (distance(oldPoint, newPoint) < movementThreshold) {
+          pointMatched = true;
+          oldPoint = newPoint; // Update old point with the new data
+          break;
+        }
+      }
+    if (!pointMatched) {
+      old_points.push_back(newPoint); // New point detected
+      std::cout << "New point detected: (" << newPoint.x << ", " << newPoint.y << ")\n";
+      // Perform actions for new points
     }
   }
-}
 
-void Method::telopDrive(void){
-    
-    while(true){    
-      std::this_thread::sleep_for (std::chrono::milliseconds(50));
+    // Identify moving points that have changed their positions
+  for (const auto& oldPoint : old_points) {
+    for (const auto& newPoint : newPoints) {
+      if (distance(oldPoint, newPoint) > movementThreshold) {
+        std::cout << "Moving point detected: (" << oldPoint.x << ", " << oldPoint.y << ")\n";
+        Motion_point = newPoint;
+        break;
+      }
     }
-
+  }
+  
+  return Motion_point;
 }
 
 
+double Method::distance(const geometry_msgs::Point& p1, const geometry_msgs::Point& p2) {
+    return std::sqrt(std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2));
+}

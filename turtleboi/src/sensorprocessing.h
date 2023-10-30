@@ -28,11 +28,20 @@ public:
 
   geometry_msgs::Point findTurtlebot();
 
+  geometry_msgs::Point findTurtlebotworld();
+
+  std::vector<geometry_msgs::Point> findAllLaserPoints();
+  void findsegments();
+
+  void PrintLaserSpec();
+
+
 
 
   private:
   RobotData Image_data;
-  double Turtlebot_width;
+  double Turtlebot_min;
+  double Turtlebot_max;
 
 };
 

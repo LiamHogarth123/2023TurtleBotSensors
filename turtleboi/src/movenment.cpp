@@ -31,7 +31,8 @@ geometry_msgs::Twist Movenment::reachGoal(){
     Angle = atan2(Goal.y,Goal.x); // check this as x and y could be flipped
     //std::cout << "Angle " << Angle << std::endl;
 
-    // std::cout << "followerDirectDistance: " << DirectDistance << std::endl;
+    std::cout << "followerDirectDistance: " << DirectDistance << std::endl;
+
 
 
 
@@ -50,7 +51,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
     if (DirectDistance < distance_from_goal && DirectDistance > 0) {
         Directions.linear.x = 0;
         Directions.angular.z = 0;
-        // std::cout << "braking" << std::endl;
+        std::cout << "braking" << std::endl;
     }
     // for rotating the bot if it cant find turtlebot
     else if (DirectDistance == 0) {
