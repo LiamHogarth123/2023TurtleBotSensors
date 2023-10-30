@@ -80,12 +80,12 @@ geometry_msgs::Twist Movenment::reachGoal(){
     //std::cout << "radius" << std::endl;
     //std::cout << radius << std::endl;
 
-    double default_velocity = 0.2;
+    double default_velocity = 0.25;
 
 
     Directions.linear.x = default_velocity;
 
-    if (DirectDistance <= 1.0) {
+    if (DirectDistance <= 0.8) {
         Directions.linear.x = 0.1;
     } else {
         Directions.linear.x = default_velocity;
@@ -100,7 +100,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
     // for rotating the bot if it cant find turtlebot
     else if (DirectDistance == 0) {
         Directions.linear.x = 0;
-        Directions.angular.z = 1;
+        Directions.angular.z = 1.5;
         //std::cout << "here1" << std::endl;
     }
     // changing the angular velocity to turn right towards the guider
