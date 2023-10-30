@@ -84,6 +84,12 @@ geometry_msgs::Twist Movenment::reachGoal(){
 
 
     Directions.linear.x = default_velocity;
+
+    if (DirectDistance <= 1.0) {
+        Directions.linear.x = 0.1;
+    } else {
+        Directions.linear.x = default_velocity;
+    }
     
     // For braking
     if (DirectDistance < distance_from_goal && DirectDistance > 0) {
@@ -107,6 +113,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
         Directions.angular.z = -default_velocity/radius;
         //std::cout << "here3" << std::endl;
     }
+    
     // if guider is directly in front of the follower (Goal.x == 0) turning is stopped
     else {
         Directions.angular.z = 0;
