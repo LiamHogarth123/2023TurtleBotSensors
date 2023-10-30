@@ -54,6 +54,27 @@ Method::Method(ros::NodeHandle nh) :
   
 }
 
+/**
+ * @brief Control the robots based on user input and threading preferences.
+ *
+ * This function allows the user to specify the control method for the robots and whether multi-threading
+ * should be used. It provides options for reading goals, providing a single goal, or manually controlling
+ * the guider robot. Based on the user's input, it configures the control method and threading accordingly.
+
+ * The function starts by presenting the user with a menu to select the desired control method. The available
+ * options are:
+ * 1. Use provided goals (readGoal function).
+ * 2. Provide a single goal.
+ * 3. Control the guider robot with user input (teleoperation mode).
+
+ * Depending on the selected option, the function configures the control method accordingly. If multi-threading
+ * is chosen, it runs 'multiThread' for concurrent control. In teleoperation mode, it spawns a thread to run
+ * 'followingRobotThread' and a separate thread for teleoperation. In other cases, it runs 'singleThread' to
+ * control the robots sequentially. User preferences for multi-threading are considered when setting 'Threading_switch'.
+
+ * @note This function serves as the entry point for controlling the robots, allowing users to specify the
+ * control method and threading settings.
+ */
 void Method::seperateThread() {
   //User input
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,14 +174,43 @@ void Method::seperateThread() {
 }
 
 
-//threading switching
-/////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Execute both following and guider robot control sequentially in a single thread.
+ *
+ * This function sequentially executes both the following robot control and the guider robot control
+ * within the same thread. It allows you to manage the behavior of both robots in a single-threaded fashion.
 
+ * The function starts by calling 'followingRobotRun' to control the behavior of the following robot, and
+ * then it proceeds to call 'guiderBotMovement' to manage the guider robot's movement.
+
+ * This single-threaded approach is suitable when you do not require concurrent control of the robots and
+ * wish to execute their behaviors sequentially in a coordinated manner.
+
+ * @note This function is used for sequential execution of control logic for both the following and guider robots,
+ * one after the other, within a single thread.
+ */
 void Method::singleThread() {
   followingRobotRun();
   guiderBotMovement();
 }
 
+/**
+ * @brief Start multi-threaded control for the guider and following robots.
+ *
+ * This function initiates multi-threaded control for the guider and following robots. It creates a new thread
+ * to run the 'guiderBotMovement' function, which controls the guider robot's movement. Meanwhile, in the main
+ * thread, it continuously calls the 'followingRobotRun' function to control the behavior of the following robot.
+
+ * The function begins by creating a new thread named 'Lead_robot_thread' to execute the 'guiderBotMovement'
+ * function, allowing simultaneous control of the guider robot. In the main thread, it enters an infinite loop,
+ * continuously executing the 'followingRobotRun' function, which manages the behavior of the following robot.
+
+ * This multi-threaded approach enables concurrent control of both robots, ensuring that the guider and following
+ * robots can operate independently in parallel.
+
+ * @note This function sets up a multi-threaded environment for controlling the guider and following robots,
+ * enabling concurrent execution of their respective behaviors.
+ */
 void Method::multiThread(){  
   std::thread Lead_robot_thread(&Method::guiderBotMovement, this);
   while (true){
@@ -168,6 +218,21 @@ void Method::multiThread(){
   }
 }
 
+/**
+ * @brief Continuously execute the following robot control thread.
+ *
+ * This function continuously executes the following robot control thread by repeatedly calling
+ * the 'followingRobotRun' function in an infinite loop. It ensures that the following robot remains
+ * responsive and actively follows the leader or performs the designated tasks.
+
+ * The function enters a never-ending loop where 'followingRobotRun' is repeatedly invoked. This is a
+ * typical pattern for controlling a thread dedicated to a specific task, ensuring that the thread runs
+ * continuously and stays responsive to external events.
+
+ * @note This function is responsible for maintaining the continuous operation of the following robot's
+ * control thread, allowing it to track and follow the leader or perform other relevant actions without
+ * interruption.
+ */
 void Method::followingRobotThread(){
   while(true){
     followingRobotRun();
@@ -175,8 +240,28 @@ void Method::followingRobotThread(){
 }
 
 
-//Movenment control for both 
-///////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Control the movement of a guider robot based on leader goals.
+ *
+ * This function is responsible for controlling the movement of a guider robot based on the leader's goals.
+ * It allows the guider robot to navigate towards specified goals while taking into account the current
+ * threading state (Threading_switch).
+
+ * If threading is enabled (Threading_switch is true), the function performs the following steps:
+ * - Pauses for 500 milliseconds to allow for synchronization.
+ * - Iterates through the list of leader goals (Leader_goals) and sets the guider's goal accordingly.
+ * - Calculates the trajectory to reach the goal using the 'reachGoal' function from GuiderGPS.
+ * - Sends the calculated trajectory to control the guider's movement using 'Send_cmd_tb2'.
+
+ * If threading is not enabled (Threading_switch is false), the function follows a similar process:
+ * - Sets the guider's goal based on the goal at the current 'goal_index' in the list of leader goals.
+ * - Calculates the trajectory for the guider to reach this goal using 'guiderReachGoal' function.
+ * - Sends the trajectory to control the guider's movement using 'Send_cmd_tb2'.
+ * - Checks if the guider has reached the goal using 'goal_hit', and if so, increments the goal_index.
+
+ * @note This function is a key part of the guider robot's behavior, allowing it to follow leader goals and
+ * adjust its movement based on threading settings and goal-reaching status.
+ */
 void Method::guiderBotMovement(){
   
   if (Threading_switch){
@@ -209,6 +294,22 @@ void Method::guiderBotMovement(){
   }
 }
 
+/**
+ * @brief Run the control logic for the following robot.
+ *
+ * This function is responsible for executing the control logic for the following robot. It includes the following steps:
+ * 1. Updates the robot's sensor data by calling 'Newdata' with updated image data obtained from 'Update_Robot_Image_data'.
+ * 2. Determines the goal point for the following robot by calling 'findTurtlebot' on the updated sensor data.
+ * 3. Sets the goal for the following robot using the determined point.
+ * 4. Calculates the trajectory to reach the goal by calling 'reachGoal' on the GPS (Global Positioning System).
+ * 5. Sends the calculated trajectory to control the motion of the following robot.
+
+ * This function is essential for managing the behavior of the following robot as it tracks the goal, taking into account
+ * sensor data and GPS-based navigation.
+
+ * @note The control logic executed in this function ensures that the following robot actively pursues the goal
+ * and maintains its trajectory accordingly.
+ */
 void Method::followingRobotRun(){
         
 
@@ -289,12 +390,78 @@ RobotData Method::Update_Robot_Image_data(){
   return Image_data;
 }
 
+/**
+ * @brief Adjust laser data coordinates based on robot orientation and position.
+ *
+ * This function adjusts the laser data coordinates to be in the robot's reference frame, considering its
+ * orientation and position. It performs a coordinate transformation and applies the robot's current pose.
+
+ * @param laser_data The original laser data in the global reference frame.
+ * @param Position The current odometry position of the robot.
+
+ * @return The adjusted laser data coordinates in the robot's reference frame.
+
+ * The function takes the original laser data in the global reference frame and the robot's current odometry position.
+ * It first extracts the robot's orientation from the odometry message and converts it to Euler angles (roll, pitch, yaw).
+ * Using these angles, it performs a coordinate transformation to adjust the laser data coordinates to the robot's
+ * reference frame.
+
+ * The adjusted values are further adjusted by adding the robot's current position offset. The resulting adjusted
+ * coordinates are returned.
+
+ * @note This function is critical for aligning laser data with the robot's orientation and position, ensuring
+ * accurate data interpretation for navigation and mapping.
+ */
+//data Adjustement function
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
+  geometry_msgs::Point adjustedValues;
+  
+  // Get the orientation from the odometry message
+  geometry_msgs::Quaternion orientation = Position.pose.pose.orientation;
+  
+  // Convert the quaternion to Euler angles (roll, pitch, yaw)
+  tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
+  double roll, pitch, yaw;
+  mat.getRPY(roll, pitch, yaw);
+  
+  // Perform the coordinate transformation
+  adjustedValues.x = laser_data.x * cos(yaw) - laser_data.y * sin(yaw);
+  adjustedValues.y = laser_data.x * sin(yaw) + laser_data.y * cos(yaw);
+  
+  // Add the position offset
+  adjustedValues.x += Position.pose.pose.position.x;
+  adjustedValues.y += Position.pose.pose.position.y;
+  
+  return adjustedValues;
+}
 
 
+/**
+ * @brief Read and parse goal points from a text file.
+ *
+ * This function reads goal points from a text file, parses the contents, and populates the 'Leader_goals' vector
+ * with the extracted points. It allows you to specify the filename of the text file containing goal information.
+
+ * @return 'true' if the goal points were successfully read and parsed, 'false' otherwise.
+
+ * The function begins by defining the filename of the text file that contains the goal points. It attempts to open
+ * the file for reading and checks for any errors during the file opening process. If the file cannot be opened, it
+ * reports an error and returns 'false' as an error code.
+
+ * If the file is successfully opened, the function reads each line from the file and parses it to extract the
+ * 'x', 'y', and 'z' coordinates of a goal point. If parsing is successful, the extracted point is added to the
+ * 'Leader_goals' vector. If any line cannot be parsed, an error message is displayed.
+
+ * After reading and parsing all the goal points, the function closes the file and prints the parsed points to the console.
+
+ * @note This function is crucial for loading and configuring goal points from a text file, enabling the robot to
+ * navigate to predefined locations.
+ */
 
 // Read/Load goals
 //////////////////////////////////////////////////////////////////////
-bool Method::readGoal(bool house) {
+bool Method::readGoal() {
     // Define the filename of the text file you want to read
     // std::string filename = "../data/Goals.TXT";
     std::string filename;
