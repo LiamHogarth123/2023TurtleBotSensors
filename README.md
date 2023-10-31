@@ -1,4 +1,4 @@
-TURTLEBOI Information
+Project 7: Turtlebot Robot Following Each Other
 =========================
 
 ### Compiling
