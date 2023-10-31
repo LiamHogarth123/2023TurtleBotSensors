@@ -88,12 +88,7 @@ void Method::seperateThread() {
 
   switch (input_int) {
     case 1: {
-
-      std::cout << "Please input environment type (h = house, e = empty)"<< std::endl;
-      std::cin >> userInput;
-      if (userInput == "h"){
-        default_goals = true;
-        }
+      default_goals = true;
       break;
       }
     case 2:{
@@ -123,19 +118,14 @@ void Method::seperateThread() {
     }
   }
 
-  // std::cout << "Would you like to use multiThreading for each turtlebot: (y/n)" << std::endl;
-
-  // std::cin >> userInput;
-
-  // if (userInput == "y"){
-  //   Threading_switch = true;
-  // }
+  
 
 
 
   std::cout << "Please input environment type (h = house, e = empty)"<< std::endl;
   std::cin >> userInput;
   if (userInput == "h"){
+    
     house = true;
     if (default_goals){
       readGoal(true);
@@ -322,7 +312,17 @@ void Method::followingRobotRun(){
     NewPoints = adjustLaserDataVector(NewPoints, Current_Odom);
 
     goal = motion_dection(current_map, NewPoints);
-    goal = global_To_local(goal, Current_Odom);
+    
+    std::cout << "goal golabl" <<std::endl;
+    std::cout << goal.x <<std::endl;
+    std::cout << goal.y <<std::endl;
+    if (goal.x != 0 && goal.y != 0){
+      goal = global_To_local(goal, Current_Odom);
+    }
+    std::cout << "goal local" <<std::endl;
+    std::cout << goal.x <<std::endl;
+    std::cout << goal.y <<std::endl;
+
 
     current_map = NewPoints;
   }
@@ -390,51 +390,7 @@ RobotData Method::Update_Robot_Image_data(){
   return Image_data;
 }
 
-/**
- * @brief Adjust laser data coordinates based on robot orientation and position.
- *
- * This function adjusts the laser data coordinates to be in the robot's reference frame, considering its
- * orientation and position. It performs a coordinate transformation and applies the robot's current pose.
 
- * @param laser_data The original laser data in the global reference frame.
- * @param Position The current odometry position of the robot.
-
- * @return The adjusted laser data coordinates in the robot's reference frame.
-
- * The function takes the original laser data in the global reference frame and the robot's current odometry position.
- * It first extracts the robot's orientation from the odometry message and converts it to Euler angles (roll, pitch, yaw).
- * Using these angles, it performs a coordinate transformation to adjust the laser data coordinates to the robot's
- * reference frame.
-
- * The adjusted values are further adjusted by adding the robot's current position offset. The resulting adjusted
- * coordinates are returned.
-
- * @note This function is critical for aligning laser data with the robot's orientation and position, ensuring
- * accurate data interpretation for navigation and mapping.
- */
-//data Adjustement function
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
-  geometry_msgs::Point adjustedValues;
-  
-  // Get the orientation from the odometry message
-  geometry_msgs::Quaternion orientation = Position.pose.pose.orientation;
-  
-  // Convert the quaternion to Euler angles (roll, pitch, yaw)
-  tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
-  double roll, pitch, yaw;
-  mat.getRPY(roll, pitch, yaw);
-  
-  // Perform the coordinate transformation
-  adjustedValues.x = laser_data.x * cos(yaw) - laser_data.y * sin(yaw);
-  adjustedValues.y = laser_data.x * sin(yaw) + laser_data.y * cos(yaw);
-  
-  // Add the position offset
-  adjustedValues.x += Position.pose.pose.position.x;
-  adjustedValues.y += Position.pose.pose.position.y;
-  
-  return adjustedValues;
-}
 
 
 /**
@@ -461,7 +417,7 @@ geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, na
 
 // Read/Load goals
 //////////////////////////////////////////////////////////////////////
-bool Method::readGoal() {
+bool Method::readGoal(bool house) {
     // Define the filename of the text file you want to read
     // std::string filename = "../data/Goals.TXT";
     std::string filename;
@@ -516,6 +472,33 @@ bool Method::readGoal() {
 }
 
 
+//data Adjustement function
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/**
+ * @brief Adjust laser data coordinates based on robot orientation and position.
+ *
+ * This function adjusts the laser data coordinates to be in the robot's reference frame, considering its
+ * orientation and position. It performs a coordinate transformation and applies the robot's current pose.
+
+ * @param laser_data The original laser data in the global reference frame.
+ * @param Position The current odometry position of the robot.
+
+ * @return The adjusted laser data coordinates in the robot's reference frame.
+
+ * The function takes the original laser data in the global reference frame and the robot's current odometry position.
+ * It first extracts the robot's orientation from the odometry message and converts it to Euler angles (roll, pitch, yaw).
+ * Using these angles, it performs a coordinate transformation to adjust the laser data coordinates to the robot's
+ * reference frame.
+
+ * The adjusted values are further adjusted by adding the robot's current position offset. The resulting adjusted
+ * coordinates are returned.
+
+ * @note This function is critical for aligning laser data with the robot's orientation and position, ensuring
+ * accurate data interpretation for navigation and mapping.
+ */
 //data Adjustement function
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
@@ -627,5 +610,5 @@ geometry_msgs::Point Method::motion_dection(std::vector<geometry_msgs::Point> ol
 
 
 double Method::distance(const geometry_msgs::Point& p1, const geometry_msgs::Point& p2) {
-    return std::sqrt(std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2));
+  return std::sqrt(std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2));
 }
