@@ -26,12 +26,11 @@ public:
 
   geometry_msgs::Point polarToCart(unsigned int index);
 
-  geometry_msgs::Point findTurtlebot();
+  geometry_msgs::Point findTurtlebottesting();
 
   geometry_msgs::Point findTurtlebotworld();
 
   std::vector<geometry_msgs::Point> findAllLaserPoints();
-  void findsegments();
 
   void PrintLaserSpec();
 

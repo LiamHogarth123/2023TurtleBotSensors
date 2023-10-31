@@ -158,7 +158,7 @@ void Method::seperateThread() {
   else{
     while (true){
       singleThread();
-      std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+      std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
   }
 }
@@ -316,22 +316,27 @@ void Method::followingRobotRun(){
     std::cout << "goal golabl" <<std::endl;
     std::cout << goal.x <<std::endl;
     std::cout << goal.y <<std::endl;
-    if (goal.x != 0 && goal.y != 0){
-      goal = global_To_local(goal, Current_Odom);
-    }
-    std::cout << "goal local" <<std::endl;
-    std::cout << goal.x <<std::endl;
-    std::cout << goal.y <<std::endl;
 
+    // if (goal.x != 0 && goal.y != 0){
+    //   goal = global_To_local(goal, Current_Odom);
+    // }
+    // std::cout << "goal local" <<std::endl;
+    // std::cout << goal.x <<std::endl;
+    // std::cout << goal.y <<std::endl;
+    GPS.newGoal(goal, Current_Odom);  
+    traj = GPS.guiderReachGoal();
 
     current_map = NewPoints;
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
   }
   else {
     goal = scanData.findTurtlebotworld();
+    GPS.newGoal(goal, Current_Odom);  
+    traj = GPS.reachGoal();
   }
 
-  GPS.newGoal(goal, Current_Odom);  
-  traj = GPS.reachGoal();
+  
   Send_cmd_tb1(traj);
 }
 
@@ -392,7 +397,8 @@ RobotData Method::Update_Robot_Image_data(){
 
 
 
-
+// / Read/Load goals
+//////////////////////////////////////////////////////////////////////
 /**
  * @brief Read and parse goal points from a text file.
  *
@@ -414,9 +420,6 @@ RobotData Method::Update_Robot_Image_data(){
  * @note This function is crucial for loading and configuring goal points from a text file, enabling the robot to
  * navigate to predefined locations.
  */
-
-// Read/Load goals
-//////////////////////////////////////////////////////////////////////
 bool Method::readGoal(bool house) {
     // Define the filename of the text file you want to read
     // std::string filename = "../data/Goals.TXT";
@@ -472,35 +475,23 @@ bool Method::readGoal(bool house) {
 }
 
 
+
+
+
+
 //data Adjustement function
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * @brief Adjust laser data coordinates based on robot orientation and position.
+ * @brief Adjusts laser data based on robot position and orientation.
  *
- * This function adjusts the laser data coordinates to be in the robot's reference frame, considering its
- * orientation and position. It performs a coordinate transformation and applies the robot's current pose.
-
- * @param laser_data The original laser data in the global reference frame.
- * @param Position The current odometry position of the robot.
-
- * @return The adjusted laser data coordinates in the robot's reference frame.
-
- * The function takes the original laser data in the global reference frame and the robot's current odometry position.
- * It first extracts the robot's orientation from the odometry message and converts it to Euler angles (roll, pitch, yaw).
- * Using these angles, it performs a coordinate transformation to adjust the laser data coordinates to the robot's
- * reference frame.
-
- * The adjusted values are further adjusted by adding the robot's current position offset. The resulting adjusted
- * coordinates are returned.
-
- * @note This function is critical for aligning laser data with the robot's orientation and position, ensuring
- * accurate data interpretation for navigation and mapping.
+ * This function takes laser data and an odometry position, and adjusts the
+ * laser data by considering the robot's orientation and position.
+ *
+ * @param laser_data The original laser data point to be adjusted.
+ * @param Position The robot's odometry position, which includes orientation and position.
+ * @return The adjusted laser data point in the robot's reference frame.
  */
-//data Adjustement function
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position) {
   geometry_msgs::Point adjustedValues;
   
@@ -524,6 +515,17 @@ geometry_msgs::Point Method::adjustLaserData(geometry_msgs::Point laser_data, na
 }
 
 
+/**
+ * @brief Adjusts a vector of laser data points based on robot position and orientation.
+ *
+ * This function takes a vector of laser data points and an odometry position and adjusts
+ * each laser data point by considering the robot's orientation and position. The adjusted
+ * points are returned in a new vector.
+ *
+ * @param laser_data A vector of original laser data points to be adjusted.
+ * @param Position The robot's odometry position, which includes orientation and position.
+ * @return A vector of adjusted laser data points in the robot's reference frame.
+ */
 std::vector<geometry_msgs::Point> Method::adjustLaserDataVector(std::vector<geometry_msgs::Point> laser_data, nav_msgs::Odometry Position) {
   std::vector<geometry_msgs::Point> adjustedValues;
   geometry_msgs::Point temp;
@@ -549,6 +551,16 @@ std::vector<geometry_msgs::Point> Method::adjustLaserDataVector(std::vector<geom
 }
 
 
+/**
+ * @brief Transforms a global point to the local frame based on robot pose.
+ *
+ * This function takes a global point and the robot's pose and transforms the global
+ * point to the local frame of the robot. It considers the robot's orientation and position.
+ *
+ * @param globalPoint The global point to be transformed to the local frame.
+ * @param robotPose The robot's odometry pose, including orientation and position.
+ * @return The point in the local frame after transformation.
+ */
 geometry_msgs::Point Method::global_To_local(geometry_msgs::Point globalPoint, nav_msgs::Odometry robotPose) {
     // Extract the robot's orientation (Quaternion) from robotPose
   geometry_msgs::Quaternion orientation = robotPose.pose.pose.orientation;
@@ -557,10 +569,20 @@ geometry_msgs::Point Method::global_To_local(geometry_msgs::Point globalPoint, n
   tf::Matrix3x3 mat(tf::Quaternion(orientation.x, orientation.y, orientation.z, orientation.w));
   double roll, pitch, yaw;
   mat.getRPY(roll, pitch, yaw);
+  yaw = yaw;
+
+
+  // globalPoint.x = globalPoint.x -robotPose.pose.pose.position.x; 
+  // globalPoint.y = globalPoint.y -robotPose.pose.pose.position.y;
+
+  // globalPoint.x = globalPoint.x * sin(yaw) - globalPoint.y * cos(yaw);
+  // globalPoint.y = globalPoint.y * cos(yaw) + globalPoint.y * sin(yaw);
+
+
 
   // Perform the coordinate transformation to move the point back to the original local frame
   double rotatedX = globalPoint.x * cos(yaw) - globalPoint.y * sin(yaw);
-  double rotatedY = globalPoint.x * sin(yaw) + globalPoint.y * cos(yaw);
+  double rotatedY = globalPoint.y * sin(yaw) + globalPoint.y * cos(yaw);
 
   // Add the position offset to move the point back to the local frame
   double localX = rotatedX + robotPose.pose.pose.position.x;
@@ -570,14 +592,27 @@ geometry_msgs::Point Method::global_To_local(geometry_msgs::Point globalPoint, n
   localPoint.x = localX;
   localPoint.y = localY;
 
+  // globalPoint.x = globalPoint.x 
+  // globalPoint.y = globalPoint.y
+
   return localPoint;
 }
 
 
-
+/**
+ * @brief Detects motion between old and new points and returns a motion point.
+ *
+ * This function compares old_points with newPoints to detect motion and
+ * updates old_points accordingly. It checks for points that have moved beyond
+ * a specified movementThreshold and reports new points and moving points.
+ *
+ * @param old_points A vector of old points to compare against.
+ * @param newPoints A vector of new points to compare to old_points.
+ * @return The motion point if detected, or a default-initialized point if no motion is found.
+ */
 geometry_msgs::Point Method::motion_dection(std::vector<geometry_msgs::Point> old_points, std::vector<geometry_msgs::Point> newPoints){
   geometry_msgs::Point Motion_point;
-  double movementThreshold = 0.01;
+  double movementThreshold = 0.2;
   for (const auto& newPoint : newPoints) {
     bool pointMatched = false;
     for (auto& oldPoint : old_points) {
@@ -604,11 +639,14 @@ geometry_msgs::Point Method::motion_dection(std::vector<geometry_msgs::Point> ol
       }
     }
   }
-  
   return Motion_point;
 }
 
 
+/// @brief  This function calculates the direct distance between two 2d points
+/// @param p1 the first point to compare
+/// @param p2 the second point to compare
+/// @return returns a double of distance between the points.
 double Method::distance(const geometry_msgs::Point& p1, const geometry_msgs::Point& p2) {
   return std::sqrt(std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2));
 }

@@ -70,10 +70,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
     Angle = atan2(Goal.y,Goal.x); // check this as x and y could be flipped
     //std::cout << "Angle " << Angle << std::endl;
 
-    std::cout << "followerDirectDistance: " << DirectDistance << std::endl;
-
-
-
+    // std::cout << "followerDirectDistance: " << DirectDistance << std::endl;
 
     theta = M_PI - (2*((M_PI/2)-Angle));
 
@@ -111,7 +108,7 @@ geometry_msgs::Twist Movenment::reachGoal(){
     }
     // changing the angular velocity to turn left towards the guider
     else if (Goal.x < 0) {
-        Directions.angular.z = -default_velocity/radius;
+        Directions.angular.z = - default_velocity/radius;
         //std::cout << "here3" << std::endl;
     }
     
