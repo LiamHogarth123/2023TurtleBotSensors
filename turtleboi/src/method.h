@@ -60,11 +60,16 @@ public:
 
   void followingRobotRun();
 
-  bool readGoal();
+  bool readGoal(bool house);
 
 
 
   geometry_msgs::Point adjustLaserData(geometry_msgs::Point laser_data, nav_msgs::Odometry Position);
+
+  std::vector<geometry_msgs::Point> adjustLaserDataVector(std::vector<geometry_msgs::Point> laser_data, nav_msgs::Odometry Position);
+
+  geometry_msgs::Point global_To_local(geometry_msgs::Point globalPoint, nav_msgs::Odometry robotPose);
+
   void guiderBotMovement();
 
   void singleThread();
@@ -76,6 +81,10 @@ public:
   void telopDrive(void);
   
   void followingRobotThread();
+
+  geometry_msgs::Point motion_dection(std::vector<geometry_msgs::Point> old_points, std::vector<geometry_msgs::Point> newPoints);
+
+  double distance (const geometry_msgs::Point& p1, const geometry_msgs::Point& p2);
 
 
   // Prameters for ROS
@@ -134,6 +143,11 @@ public:
 
   bool debuggingMode;
   bool telop_mode;
+  bool house;
+  bool default_goals;
+
+  //variables for complex motion dection
+  std::vector<geometry_msgs::Point> current_map;
 
 };
 
